@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<link href="style.css" rel="stylesheet" />
+		<title>Agile Week</title>
+		<script src="app.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<header>
+				<div id="page-banner">
+					<h1 class="title"></h1>
+					<p>Your 360° Customer View</p>
+					<form id="search-books">
+						<input type="text" placeholder="Search Clients" />
+					</form>
+				</div>
+			</header>
+			<div id="book-list">
+				<h2 class="title">Client Database</h2>
+				<ul>
+					<li>
+						<div class="stock">TWTR</div>
+						<span class="name">John McDonald</span>
+						<span class="delete"> X </span>
+
+						<div class="status-section form-group">
+							<select class="form-control" id="status">
+								<option selected>Pending</option>
+  							<option>Bought</option>
+  							<option>Sold</option>
+  						</select>
+						</div>
+
+					</li>
+					<li>
+						<div class="stock">FB</div>
+						<span class="name">Kara Larkin</span>
+						<span class="delete"> X </span>
+
+						<div class="status-section form-group">
+							<select class="form-control" id="status">
+								<option selected>Pending</option>
+  							<option>Bought</option>
+  							<option selected>Sold</option>
+  						</select>
+						</div>
+
+					</li>
+					<li>
+						<div class="stock">GOOG</div>
+						<span class="name">Tevin Roberts</span>
+						<span class="delete"> X </span>
+
+						<div class="status-section form-group">
+							<select class="form-control selectpicker" id="status">
+								<option selected>Pending</option>
+  							<option selected>Bought</option>
+  							<option>Sold</option>
+  						</select>
+						</div>
+
+					</li>
+					<li>
+						<div class="stock">NFLX</div>
+						<span class="name">Alicia Jordan</span>
+						<span class="delete"> X </span>
+
+						<div class="status-section form-group">
+							<select class="form-control" id="status">
+								<option>Pending</option>
+  							<option selected>Bought</option>
+  							<option>Sold</option>
+  						</select>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+			<form id="add-book">
+				<input type="checkbox" id="hide">
+				<label for="hide">Hide All</label>
+				<input type="text" placeholder="Add Client" />
+				<button>Add</button>
+			</form>
+			<div id="tabbed-content">
+				<ul class="tabs">
+					<li data-target="#about" class="active">About</li>
+					<li data-target="#contact">Contact</li>
+				</ul>
+				<div class="panel active" id="about">
+					<p>Content for about tab...</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id nunc porta urna ornare rhoncus. Ut convallis ante at.</p>
+				</div>
+				<div class="panel" id="contact">
+					<p>Content for contact tab...</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id nunc porta urna ornare rhoncus. Ut convallis ante at.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	</body>
+
+</html>
