@@ -96,3 +96,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+
+
+
+
+
+// JQUERY CODE SNIPPER TO
+// EXPAND LI'S ON HOVER
+
+// $(document).ready(function() {
+
+//   $("li").hover(
+//     //on mouseover
+//     function() {
+//       $(this).animate({
+//         height: '+=250' //adds 250px
+//         }, 'slow' //sets animation speed to slow
+//       );
+//     },
+//     //on mouseout
+//     function() {
+//       $(this).animate({
+//         height: '-=250px' //substracts 250px
+//         }, 'slow'
+//       );
+//     }
+//   );
+
+// });
