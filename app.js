@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  const list = document.querySelector('#book-list ul');
+  const list = document.querySelector('#client-list ul');
 
-  //delete books
+  //delete clients
   list.addEventListener('click', function(e) {
     if (e.target.className == 'delete') {
       if (confirm('Are you sure you want to delete this client?')) {
@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  //add book-list
-  const addForm = document.forms['add-book'];
+  //add client-list
+  const addForm = document.forms['add-client'];
 
   addForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -25,21 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //create elements
     const li = document.createElement('li');
-    const bookName = document.createElement('span');
+    const clientName = document.createElement('span');
     const deleteBtn = document.createElement('span');
 
     //add content
-    bookName.textContent = value;
+    clientName.textContent = value;
     deleteBtn.textContent = ' X ';
 
     //add classes
-    bookName.classList.add('name');
+    clientName.classList.add('name');
     deleteBtn.classList.add('delete');
 
     //append to DOM
 
-    //append bookname to li
-    li.appendChild(bookName);
+    //append clientname to li
+    li.appendChild(clientName);
     //append delete button to li
     li.appendChild(deleteBtn);
 
@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  //hide books
-  const hideBooks = document.querySelector('#hide');
-  hideBooks.addEventListener('change', function(e) {
-    if (hideBooks.checked) {
+  //hide clients
+  const hideclients = document.querySelector('#hide');
+  hideclients.addEventListener('change', function(e) {
+    if (hideclients.checked) {
       list.style.display = 'none';
     }
     else {
@@ -60,19 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  //filter books
-  const searchBar = document.forms['search-books'].querySelector('input');
+  //filter clients
+  const searchBar = document.forms['search-clients'].querySelector('input');
   searchBar.addEventListener('keyup', function(e) {
     const term = e.target.value.toLowerCase();
-    const books = list.getElementsByTagName('li');
+    const clients = list.getElementsByTagName('li');
 
-    Array.from(books).forEach(function(book) {
-      const title = book.firstElementChild.textContent;
+    Array.from(clients).forEach(function(client) {
+      const title = client.firstElementChild.textContent;
       if (title.toLowerCase().indexOf(term) != -1) {
-        book.style.display = 'block';
+        client.style.display = 'block';
       }
       else {
-        book.style.display = 'none';
+        client.style.display = 'none';
       }
     });
   });
