@@ -108,33 +108,40 @@ document.addEventListener('DOMContentLoaded', function() {
 // $().button('toggle');
 
 
-// JQUERY CODE SNIPPER TO
+// JQUERY CODE SNIPPET TO
 // EXPAND LI'S ON HOVER
 
 $(document).ready(function() {
 
-  $('#client-list').click(function(e) {
-    var seeMoreArr = $('.seeMore');
-    var liArr = document.querySelectorAll('li');
 
-    if (e.target.classList.contains('seeMore')) {
-      console.log('si')
-      e.target.parentElement.animate({
-        height: '250' //adds 250px
-      }, 'auto'); //sets animation speed to slow
+  // $("li").toggle(function() {
+  //   $(this).animate({ height: 200 }, 200);
+  // }, function() {
+  //   $(this).animate({ height: 50 }, 200);
+  // });
 
-    }
-    //   else {
+  // $('#client-list').click(function(e) {
+  //   var seeMoreArr = $('.seeMore');
+  //   var liArr = document.querySelectorAll('li');
 
-    //     function(){
-    //       $('li').animate({
-    //         height: '-=250px' //substracts 250px
-    //       }, 'slow');
-    //     };
-    //   };
-    // }
+  //   if (e.target.classList.contains('seeMore')) {
+  //     console.log('si')
+  //     e.target.parentElement.animate({
+  //       height: '250' //adds 250px
+  //     }, 'auto'); //sets animation speed to slow
 
-  });
+  //   }
+  //   //   else {
+
+  //   //     function(){
+  //   //       $('li').animate({
+  //   //         height: '-=250px' //substracts 250px
+  //   //       }, 'slow');
+  //   //     };
+  //   //   };
+  //   // }
+
+  // });
 
 });
 // );
