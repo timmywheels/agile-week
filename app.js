@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
+$().button('toggle');
 
 
 // JQUERY CODE SNIPPER TO
