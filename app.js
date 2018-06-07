@@ -21,24 +21,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
   addForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const value = addForm.querySelector('input[type="text"]').value;
+    const nameValue = addForm.querySelector('#addClientName').value;
+    const tickerValue = addForm.querySelector('#addClientTicker').value;
 
     //create elements
     const li = document.createElement('li');
     const clientName = document.createElement('span');
+    const clientTicker = document.createElement('div');
     const deleteBtn = document.createElement('span');
 
     //add content
-    clientName.textContent = value;
+    clientName.textContent = nameValue;
+    clientTicker.textContent = tickerValue.toUpperCase();
     deleteBtn.textContent = ' X ';
 
     //add classes
     clientName.classList.add('name');
+    clientTicker.classList.add('stock');
     deleteBtn.classList.add('delete');
 
     //append to DOM
 
     //append clientname to li
+    li.appendChild(clientTicker);
     li.appendChild(clientName);
     //append delete button to li
     li.appendChild(deleteBtn);
