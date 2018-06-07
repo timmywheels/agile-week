@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
+/* global $*/
 
 $().button('toggle');
 
