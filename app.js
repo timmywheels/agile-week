@@ -54,16 +54,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  //hide clients
-  const hideclients = document.querySelector('#hide');
-  hideclients.addEventListener('change', function(e) {
-    if (hideclients.checked) {
-      list.style.display = 'none';
-    }
-    else {
-      list.style.display = 'initial';
-    }
-  });
+  // //hide clients
+  // const hideclients = document.querySelector('#hide');
+  // hideclients.addEventListener('change', function(e) {
+  //   if (hideclients.checked) {
+  //     list.style.display = 'none';
+  //   }
+  //   else {
+  //     list.style.display = 'initial';
+  //   }
+  // });
 
   //filter clients
   const searchBar = document.forms['search-clients'].querySelector('input');
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clients = list.getElementsByTagName('li');
 
     Array.from(clients).forEach(function(client) {
-      const title = client.firstElementChild.textContent;
+      const title = client.innerText;
       if (title.toLowerCase().indexOf(term) != -1) {
         client.style.display = 'block';
       }
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* global $*/
 
-$().button('toggle');
+// $().button('toggle');
 
 
 // JQUERY CODE SNIPPER TO
