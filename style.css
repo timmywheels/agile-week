@@ -18,6 +18,13 @@ input {
     font-family: inherit;
 }
 
+.logo {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 .form-control {
     height: calc(1.75rem + 2px) !important;
 }
@@ -61,7 +68,7 @@ input {
 
 #wrapper {
     width: 90%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 20px auto;
     /*border-radius: 6px;*/
     /*box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);*/
@@ -128,6 +135,10 @@ input {
     transition-property: box-shadow;
 }
 
+#client-list h6 {
+    text-align: center;
+}
+
 .delete {
     float: right;
     padding: 2px 7px;
@@ -145,38 +156,54 @@ input {
     transition-property: color font-weight;
 }
 
-#add-client {
+#clientSearch {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
     width: 400px;
+    text-align: center;
+}
+
+#add-client {
+    width: 600px;
     margin: 0 auto;
 }
 
 #add-client input {
-    display: block;
     margin: 20px 0;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 2px solid #ccc;
     font-size: 16px;
-    border-radius: 4px 0 0 4px;
     box-sizing: border-box;
-    width: 300px;
+    width: 150px;
     float: left;
-    clear: both;
+    /*clear: both;*/
+    display: inline-block;
+    margin-left: 10px;
 }
 
 #add-client button {
-    border: 1px solid #9361bf;
-    background: #9361bf;
+    border: none;
+    /* background: #9361bf; */
     padding: 10px 20px;
     font-size: 16px;
+    font-weight: bold;
     display: inline-block;
     margin: 0;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
-    width: 100px;
+    /* width: 100px; */
     float: left;
     margin: 20px 0;
-    border-left: 0;
-    color: white;
+    /* border-left: 0; */
+    color: #9361C3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #add-client:after {
@@ -192,6 +219,8 @@ input {
 #add-client label {
     line-height: 52px;
 }
+
+
 
 #tabbed-content li {
     display: inline-block;
