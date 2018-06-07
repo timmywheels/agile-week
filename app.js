@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //   }
   // });
 
-  //filter clients
+  //filter clients and tickers
   const searchBar = document.forms['search-clients'].querySelector('input');
   searchBar.addEventListener('keyup', function(e) {
     const term = e.target.value.toLowerCase();
