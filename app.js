@@ -105,29 +105,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* global $*/
 
-$().button('toggle');
+// $().button('toggle');
 
 
 // JQUERY CODE SNIPPER TO
 // EXPAND LI'S ON HOVER
 
-// $(document).ready(function() {
+$(document).ready(function() {
 
-//   $("li").hover(
-//     //on mouseover
-//     function() {
-//       $(this).animate({
-//         height: '+=250' //adds 250px
-//         }, 'slow' //sets animation speed to slow
-//       );
-//     },
-//     //on mouseout
-//     function() {
-//       $(this).animate({
-//         height: '-=250px' //substracts 250px
-//         }, 'slow'
-//       );
-//     }
-//   );
+  $('#client-list').click(function(e) {
+    var seeMoreArr = $('.seeMore');
+    var liArr = document.querySelectorAll('li');
 
-// });
+    if (e.target.classList.contains('seeMore')) {
+      console.log('si')
+      e.target.parentElement.animate({
+        height: '250' //adds 250px
+      }, 'auto'); //sets animation speed to slow
+
+    }
+    //   else {
+
+    //     function(){
+    //       $('li').animate({
+    //         height: '-=250px' //substracts 250px
+    //       }, 'slow');
+    //     };
+    //   };
+    // }
+
+  });
+
+});
+// );
