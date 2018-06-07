@@ -25,31 +25,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const tickerValue = addForm.querySelector('#addClientTicker').value;
 
     //create elements
-    const li = document.createElement('li');
-    const clientName = document.createElement('span');
-    const clientTicker = document.createElement('div');
-    const deleteBtn = document.createElement('span');
+    var li = "<li>" +
+      						"<div class='stock'>"+tickerValue+"</div>" +
+      						"<span class='name'>"+nameValue+"</span>" +
+      
+      						"<i class='seeMore fa fa-chevron-left'></i>" +
+      						"<!--<span class='delete'> X </span>-->" +
+      
+      						"<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+      						  "<label class='btn btn-secondary'>" +
+      							  "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+      								"<i class='fas fa-eye'></i>" +
+      							"</label>" +
+      							"<label class='btn btn-secondary active'>" +
+      							  "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+      								"<i class='fas fa-check'></i>" +
+      							"</label>" +
+      							"<label class='btn btn-secondary'>" +
+      								"<input type='radio' name='options' id='option3' autocomplete='off'>" +
+      								"<i class='fas fa-times'></i>" +
+      							"</label>" +
+      						"</div>" +
+						  "</li>";
+						  
+				$(list).append(li);
+				
+    // const clientName = document.createElement('span');
+    // const clientTicker = document.createElement('div');
+    // // const deleteBtn = document.createElement('span');
+    // const chevron = document.createElement('i');
+    // const buttons = document.createElement('div');
+    // const secondaryButton = document.createElement('label');
+    // const buttonRadio = document.createElement('input');
+    // const buttonIcon = document.createElement('i');
+    
 
-    //add content
-    clientName.textContent = nameValue;
-    clientTicker.textContent = tickerValue.toUpperCase();
-    deleteBtn.textContent = ' X ';
+    // //add content
+    // clientName.textContent = nameValue;
+    // clientTicker.textContent = tickerValue.toUpperCase();
+    // // deleteBtn.textContent = ' X ';
 
-    //add classes
-    clientName.classList.add('name');
-    clientTicker.classList.add('stock');
-    deleteBtn.classList.add('delete');
+    // //add classes
+    // clientName.classList.add('name');
+    // clientTicker.classList.add('stock');
+    // chevron.classList.add('seeMore', 'fa', 'fa-chevron-left');
+    // buttons.classList.add('btn-group', 'btn-group-toggle')
+    // buttons.attributes.d
+    // secondaryButton.classList.add('btn-group', 'btn-secondary');
+    // buttonRadio.typeof.add('radio');
+    // buttonRadio.attributes.setNamedItem('options');
+    // // deleteBtn.classList.add('delete');
 
-    //append to DOM
+    // //append to DOM
 
-    //append clientname to li
-    li.appendChild(clientTicker);
-    li.appendChild(clientName);
+    // //append clientname to li
+    // li.appendChild(clientTicker);
+    // li.appendChild(clientName);
     //append delete button to li
-    li.appendChild(deleteBtn);
+    // li.appendChild(deleteBtn);
 
     //append completed li to list
-    list.appendChild(li);
+    
+    
+    
 
 
   });
