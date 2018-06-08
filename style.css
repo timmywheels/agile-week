@@ -7,11 +7,20 @@
 body {
     color: #444;
     letter-spacing: 1px;
+    height: 100vh;
+    background-image: url('./client360-bg-1.png');
 }
 
 h1,
 h2 {
     font-weight: normal;
+}
+
+h6 {
+    text-align: center;
+    opacity: 0.25;
+    text-transform: uppercase;
+    font-size: 14px !important;
 }
 
 input {
@@ -28,6 +37,10 @@ input {
     background-color: #7360db;
     font-size: 10px;
     box-shadow: 0px 2px 5px #ac9dff;
+}
+
+.card {
+    border: none;
 }
 
 .card-body {
@@ -220,7 +233,7 @@ input {
     margin: 20px auto;
     padding: 10px;
     border: none;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 4px solid #ccc;
     font-size: 16px;
     box-sizing: border-box;
     width: 400px;
@@ -229,6 +242,7 @@ input {
     font-weight: 700;
     letter-spacing: 2px;
     color: #ccc;
+    background: transparent;
 }
 
 #add-client {
@@ -268,6 +282,7 @@ input {
 
 #add-client input::placeholder {
     color: #ccc;
+    opacity: 0.5;
 }
 
 #add-client button {
@@ -401,6 +416,15 @@ input {
 .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .btn-secondary:not(:disabled):not(.disabled):active:focus {
     box-shadow: none !important;
+}
+
+.timeStamp {
+    opacity: 0.5;
+}
+
+.timeStamp p {
+    margin-bottom: 0;
+    font-style: italic;
 }
 
 /* MEDIA QUERIES */

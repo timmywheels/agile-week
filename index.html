@@ -24,7 +24,7 @@
 						<input id="clientSearch" type="text" placeholder="&#128269;" autocomplete="off" />
 					</form>
 				</div>
-				<ul>
+				<ul id="client-list-ul">
 					<li>
 
 						<div class="consultant">
@@ -35,9 +35,9 @@
 						<span class="firstName">John</span>
 						<span class="lastName">McDonald</span>
 
-						<a href="#clientInfo" data-toggle="collapse"><i class="seeMore fa fa-chevron-left"></i></a>
+						<a href="#clientInfo" data-parent="client-list-ul" data-toggle="collapse" aria-controls="collapseOne"><i class="seeMore fa fa-chevron-left"></i></a>
 
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<div id="collapseOne" class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fas fa-eye"></i>
  							</label>
@@ -64,7 +64,11 @@
 								<div><i class="fas fa-location-arrow"></i>
 									<p>1001 Mass Ave., Sudbury, MA 01776</p>
 								</div>
-								<div><span class="delete"> X </span></div>
+								<div>
+									<span class='timeStamp'><p>Created: 5/3/2018 2:16:59 PM</p></span>
+									<span class="delete"> X </span>
+								</div>
+
 							</div>
 						</div>
 
@@ -79,10 +83,10 @@
 						<span class="firstName">Kara</span>
 						<span class="lastName">Larkin</span>
 
-						<a href="#clientInfo" data-toggle="collapse"><i class="seeMore fa fa-chevron-left"></i></a>
+						<a data-parent="client-list-ul" href="#clientInfo" aria-controls="collapseTwo" data-toggle="collapse"><i class="seeMore fa fa-chevron-left"></i></a>
 
 
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<div id="collapseTwo" class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fas fa-eye"></i>
  							</label>
@@ -109,7 +113,10 @@
 								<div><i class="fas fa-location-arrow"></i>
 									<p>22 Reed St., Providence, RI 02860</p>
 								</div>
-								<div><span class="delete"> X </span></div>
+								<div>
+									<span class='timeStamp'><p>Created: 6/3/2018 11:09:01 AM</p></span>
+									<span class="delete"> X </span>
+								</div>
 							</div>
 						</div>
 
@@ -152,7 +159,10 @@
 								<div><i class="fas fa-location-arrow"></i>
 									<p>43 State St., Seekonk, MA 02771</p>
 								</div>
-								<div><span class="delete"> X </span></div>
+								<div>
+									<span class='timeStamp'><p>Created: 12/29/2017 12:53:42 PM</p></span>
+									<span class="delete"> X </span>
+								</div>
 							</div>
 						</div>
 
@@ -197,20 +207,24 @@
 								<div><i class="fas fa-location-arrow"></i>
 									<p>14 Champlain Dr., Hudson, MA 01749</p>
 								</div>
-								<div><span class="delete"> X </span></div>
+								<div>
+									<span class='timeStamp'><p>Created: 6/1/2018 10:33:17 AM</p></span>
+									<span class="delete"> X </span>
+								</div>
+
 							</div>
 						</div>
 
 					</li>
 				</ul>
 			</div>
+			<h6>Add Client</h6>
 			<form id="add-client">
-
 				<div id="selectConsultant" class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary">
-    					<input type="radio" name="options" id="arnell" autocomplete="off" checked><p>AM</p>
- 					</label>
 					<label class="btn btn-secondary active">
+    					<input type="radio" name="options" id="arnell" autocomplete="off"><p>AM</p>
+ 					</label>
+					<label class="btn btn-secondary">
     					<input type="radio" name="options" id="reece" autocomplete="off"><p>RF</p>
   					</label>
 				</div>
