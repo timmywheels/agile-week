@@ -144,6 +144,14 @@ input {
     /* vertical-align: middle; */
     min-width: 30px;
     min-height: 30px;
+    transition-duration: .5s;
+    transition-property: box-shadow;
+}
+
+.consultant:hover {
+    box-shadow: none;
+    transition-duration: .5s;
+    transition-property: box-shadow;
 }
 
 .consultant p {
