@@ -12,13 +12,7 @@
 
 	<body>
 		<div id="container">
-			<!--<header>-->
-			<!--	<div id="page-banner">-->
-			<!--		<h1 class="title"></h1>-->
-			<!--		<p>Your 360° Customer View</p>-->
 
-			<!--	</div>-->
-			<!--</header>-->
 			<div id="client-list">
 				<img src="client360-logo.svg" alt="Client360 Logo" class="logo">
 				<h6>Your 360° Customer View</h6>
@@ -27,22 +21,13 @@
 						<input id="clientSearch" type="text" placeholder="Search..." />
 					</form>
 				</div>
-				<ul id="client-ul">
+				<ul>
 					<li>
 						<div class="stock">TWTR</div>
 						<span class="name">John McDonald</span>
-						<i class="seeMore fa fa-chevron-left"></i>
 
-						<!-- Hiding Delete Button for Now-->
-						<!--<span class="delete"> X </span>-->
+						<a href="#clientInfo" data-toggle="collapse" <i class="seeMore fa fa-chevron-left"></i></a>
 
-						<!--<div class="status-section form-group">-->
-						<!--	<select class="form-control" id="status">-->
-						<!--		<option selected>Watching</option>-->
-						<!--			<option>Bought</option>-->
-						<!--			<option>Sold</option>-->
-						<!--		</select>-->
-						<!--</div>-->
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fas fa-eye"></i>
@@ -53,6 +38,22 @@
 							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-times"></i>
   							</label>
+						</div>
+
+						<!-- Client Info Toggle Section-->
+						<div class="collapse multi-collapse" id="clientInfo">
+							<div class="card card-body">
+								<div><i class="fas fa-phone"></i>
+									<p>(978) 495-0992</p>
+								</div>
+								<div><i class="fas fa-envelope"></i>
+									<p>jmac777@gmail.com</p>
+								</div>
+								<div><i class="fas fa-location-arrow"></i>
+									<p>1001 Mass Ave., Sudbury, MA 01776</p>
+								</div>
+								<div><span class="delete"> X </span></div>
+							</div>
 						</div>
 
 					</li>
@@ -60,8 +61,8 @@
 						<div class="stock">FB</div>
 						<span class="name">Kara Larkin</span>
 
-						<i class="seeMore fa fa-chevron-left"></i>
-						<!--<span class="delete"> X </span>-->
+						<a href="#clientInfo" data-toggle="collapse" <i class="seeMore fa fa-chevron-left"></i></a>
+
 
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary">
@@ -75,31 +76,28 @@
   							</label>
 						</div>
 
-						<!--<div class="status-section form-group">-->
-						<!--	<input type="radio" name="watching" id="radioWatching">-->
-						<!--	<input type="radio" name="bought" id="radioBought">-->
-						<!--	<input type="radio" name="sold" id="radioSold">-->
-						<!--<select class="form-control" id="status">-->
-						<!--	<option selected>Watching</option>-->
-						<!--		<option>Bought</option>-->
-						<!--		<option selected>Sold</option>-->
-						<!--	</select>-->
-						<!--</div>-->
+						<!-- Client Info Toggle Section-->
+						<div class="collapse multi-collapse" id="clientInfo">
+							<div class="card card-body">
+								<div><i class="fas fa-phone"></i>
+									<p>(508) 774-9921</p>
+								</div>
+								<div><i class="fas fa-envelope"></i>
+									<p>klarkin88@gmail.com</p>
+								</div>
+								<div><i class="fas fa-location-arrow"></i>
+									<p>22 Reed St., Providence, RI 02860</p>
+								</div>
+								<div><span class="delete"> X </span></div>
+							</div>
+						</div>
 
 					</li>
 					<li>
 						<div class="stock">GOOG</div>
 						<span class="name">Tevin Roberts</span>
-						<i class="seeMore fa fa-chevron-left"></i>
-						<!--<span class="delete"> X </span>-->
+						<a href="#clientInfo" data-toggle="collapse" <i class="seeMore fa fa-chevron-left"></i></a>
 
-						<!--<div class="status-section form-group">-->
-						<!--	<select class="form-control selectpicker" id="status">-->
-						<!--		<option selected>Watching</option>-->
-						<!--			<option selected>Bought</option>-->
-						<!--			<option>Sold</option>-->
-						<!--		</select>-->
-						<!--</div>-->
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fas fa-eye"></i>
@@ -110,33 +108,58 @@
 							<label class="btn btn-secondary active">
     							<input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-times"></i>
   							</label>
+						</div>
+
+						<!-- Client Info Toggle Section-->
+						<div class="collapse multi-collapse" id="clientInfo">
+							<div class="card card-body">
+								<div><i class="fas fa-phone"></i>
+									<p>(708) 424-1191</p>
+								</div>
+								<div><i class="fas fa-envelope"></i>
+									<p>tevin1990@aol.com</p>
+								</div>
+								<div><i class="fas fa-location-arrow"></i>
+									<p>43 State St., Seekonk, MA 02771</p>
+								</div>
+								<div><span class="delete"> X </span></div>
+							</div>
 						</div>
 
 					</li>
 					<li>
 						<div class="stock">NFLX</div>
 						<span class="name">Alicia Jordan</span>
-						<i class="seeMore fa fa-chevron-left"></i>
-						<!--<span class="delete"> X </span>-->
+						<a href="#clientInfo" data-toggle="collapse" <i class="seeMore fa fa-chevron-left"></i></a>
 
-						<!--<div class="status-section form-group">-->
-						<!--	<select class="form-control" id="status">-->
-						<!--		<option>Watching</option>-->
-						<!--			<option selected>Bought</option>-->
-						<!--			<option>Sold</option>-->
-						<!--		</select>-->
-						<!--</div>-->
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active">
+							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fas fa-eye"></i>
  							</label>
 							<label class="btn btn-secondary">
     							<input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-check"></i>
   							</label>
-							<label class="btn btn-secondary">
+							<label class="btn btn-secondary active">
     							<input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-times"></i>
   							</label>
 						</div>
+
+						<!-- Client Info Toggle Section-->
+						<div class="collapse multi-collapse" id="clientInfo">
+							<div class="card card-body">
+								<div><i class="fas fa-phone"></i>
+									<p>(978) 495-0992</p>
+								</div>
+								<div><i class="fas fa-envelope"></i>
+									<p>jordana@yahoo.com</p>
+								</div>
+								<div><i class="fas fa-location-arrow"></i>
+									<p>14 Champlain Dr., Hudson, MA 01749</p>
+								</div>
+								<div><span class="delete"> X </span></div>
+							</div>
+						</div>
+
 					</li>
 				</ul>
 			</div>

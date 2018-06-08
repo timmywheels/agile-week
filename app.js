@@ -1,3 +1,5 @@
+/*global $*/
+
 document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   list.addEventListener('click', function(e) {
     if (e.target.className == 'delete') {
       if (confirm('Are you sure you want to delete this client?')) {
-        const li = e.target.parentElement;
+        const li = e.target.parentElement.parentElement.parentElement.parentElement; // Might not be the best solution, but works
         list.removeChild(li);
       };
 
@@ -26,30 +28,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //create elements
     var li = "<li>" +
-      						"<div class='stock'>"+tickerValue.toUpperCase()+"</div>" +
-      						"<span class='name'>"+nameValue+"</span>" +
-      
-      						"<i class='seeMore fa fa-chevron-left'></i>" +
-      						"<!--<span class='delete'> X </span>-->" +
-      
-      						"<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
-      						  "<label class='btn btn-secondary'>" +
-      							  "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
-      								"<i class='fas fa-eye'></i>" +
-      							"</label>" +
-      							"<label class='btn btn-secondary active'>" +
-      							  "<input type='radio' name='options' id='option2' autocomplete='off'>" +
-      								"<i class='fas fa-check'></i>" +
-      							"</label>" +
-      							"<label class='btn btn-secondary'>" +
-      								"<input type='radio' name='options' id='option3' autocomplete='off'>" +
-      								"<i class='fas fa-times'></i>" +
-      							"</label>" +
-      						"</div>" +
-						  "</li>";
-						  
-				$(list).append(li);
-				
+      "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" +
+      "<span class='name'>" + nameValue + "</span>" +
+
+      "<i class='seeMore fa fa-chevron-left'></i>" +
+      "<!--<span class='delete'> X </span>-->" +
+
+      "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+      "<label class='btn btn-secondary'>" +
+      "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+      "<i class='fas fa-eye'></i>" +
+      "</label>" +
+      "<label class='btn btn-secondary active'>" +
+      "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+      "<i class='fas fa-check'></i>" +
+      "</label>" +
+      "<label class='btn btn-secondary'>" +
+      "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+      "<i class='fas fa-times'></i>" +
+      "</label>" +
+      "</div>" +
+      "</li>";
+
+    $(list).append(li);
+
     // const clientName = document.createElement('span');
     // const clientTicker = document.createElement('div');
     // // const deleteBtn = document.createElement('span');
@@ -58,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // const secondaryButton = document.createElement('label');
     // const buttonRadio = document.createElement('input');
     // const buttonIcon = document.createElement('i');
-    
+
 
     // //add content
     // clientName.textContent = nameValue;
@@ -85,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // li.appendChild(deleteBtn);
 
     //append completed li to list
-    
-    
-    
+
+
+
 
 
   });
@@ -141,45 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/* global $*/
-
-// $().button('toggle');
-
-
-// JQUERY CODE SNIPPET TO
-// EXPAND LI'S ON HOVER
-
-$(document).ready(function() {
+// Toggle Li to show client info
+// $(document).ready(function() {
 
 
-  // $("li").toggle(function() {
-  //   $(this).animate({ height: 200 }, 200);
-  // }, function() {
-  //   $(this).animate({ height: 50 }, 200);
-  // });
 
-  // $('#client-list').click(function(e) {
-  //   var seeMoreArr = $('.seeMore');
-  //   var liArr = document.querySelectorAll('li');
 
-  //   if (e.target.classList.contains('seeMore')) {
-  //     console.log('si')
-  //     e.target.parentElement.animate({
-  //       height: '250' //adds 250px
-  //     }, 'auto'); //sets animation speed to slow
 
-  //   }
-  //   //   else {
-
-  //   //     function(){
-  //   //       $('li').animate({
-  //   //         height: '-=250px' //substracts 250px
-  //   //       }, 'slow');
-  //   //     };
-  //   //   };
-  //   // }
-
-  // });
-
-});
-// );
+// });
