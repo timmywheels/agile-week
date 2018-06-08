@@ -18,6 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+
+  // Set consultant value
+
+  // var consultantVal = '';
+
+  if (document.getElementById('arnell').parentElement.classList.contains('active')) {
+    var consultantInitials = 'AM';
+    var consultantFullName = 'Arnell Milhouse';
+  }
+
+  else if (document.getElementById('reece').parentElement.classList.contains('active')) {
+    var consultantInitials = 'RF';
+    var consultantFullName = 'Reece Franklin';
+  }
+
+
+
   //add client-list
   const addForm = document.forms['add-client'];
 
@@ -29,11 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //create elements
     var li = "<li>" +
+      "<div class='consultant'><p>" + consultantInitials + "</p></div>" +
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" +
-      "<span class='name'>" + firstNameValue + "</span>" + ' ' +
-      "<span class='name'>" + lastNameValue + "</span>" +
+      "<span class='firstName'>" + firstNameValue + "</span>" + ' ' +
+      "<span class='lastName'>" + lastNameValue + "</span>" +
 
-      "<i class='seeMore fa fa-chevron-left'></i>" +
+      "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" +
       "<!--<span class='delete'> X </span>-->" +
 
       "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
@@ -49,6 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
       "<input type='radio' name='options' id='option3' autocomplete='off'>" +
       "<i class='fas fa-times'></i>" +
       "</label>" +
+      "</div>" +
+      "<div class='collapse multi-collapse' id='clientInfo'>" +
+      "<div class='card card-body'>" +
+      "<div><i class='fas fa-user-tie'></i>" + ' ' +
+      "<p id='consultant'>" + consultantFullName + "</p>" + "</div>" +
+      "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
+      "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
+      "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+      "<div><span class='delete'> X </span></div>" +
+      "</div>" +
       "</div>" +
       "</li>";
 
@@ -123,33 +151,25 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
-  //tabbed content
-  const tabs = document.querySelector('.tabs');
-  const panels = document.querySelectorAll('.panel');
-
-  tabs.addEventListener('click', function(e) {
-    if (e.target.tagName == 'LI') {
-      const targetPanel = document.querySelector(e.target.dataset.target);
-      Array.from(panels).forEach(function(panel) {
-        if (panel == targetPanel) {
-          panel.classList.add('active');
-        }
-        else {
-          panel.classList.remove('active');
-        }
-      });
-
-    }
-  });
 });
 
 
-// Toggle Li to show client info
-// $(document).ready(function() {
 
+// //tabbed content
+// const tabs = document.querySelector('.tabs');
+// const panels = document.querySelectorAll('.panel');
 
+// tabs.addEventListener('click', function(e) {
+//   if (e.target.tagName == 'LI') {
+//     const targetPanel = document.querySelector(e.target.dataset.target);
+//     Array.from(panels).forEach(function(panel) {
+//       if (panel == targetPanel) {
+//         panel.classList.add('active');
+//       }
+//       else {
+//         panel.classList.remove('active');
+//       }
+//     });
 
-
-
+//   }
 // });
