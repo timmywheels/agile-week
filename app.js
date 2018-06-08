@@ -23,13 +23,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   addForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const nameValue = addForm.querySelector('#addClientName').value;
+    const firstNameValue = addForm.querySelector('#addClientFirstName').value;
+    const lastNameValue = addForm.querySelector('#addClientLastName').value;
     const tickerValue = addForm.querySelector('#addClientTicker').value;
 
     //create elements
     var li = "<li>" +
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" +
-      "<span class='name'>" + nameValue + "</span>" +
+      "<span class='name'>" + firstNameValue + "</span>" + ' ' +
+      "<span class='name'>" + lastNameValue + "</span>" +
 
       "<i class='seeMore fa fa-chevron-left'></i>" +
       "<!--<span class='delete'> X </span>-->" +

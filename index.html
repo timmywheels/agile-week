@@ -4,7 +4,8 @@
 	<head>
 		<meta charset="utf-8">
 		<link href="style.css" rel="stylesheet" />
-		<title>Agile Week</title>
+		<title>Client360 | Your 360° Customer View </title>
+		<link rel=icon href="favicon.ico" sizes="16x16" type="image/png">
 		<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -18,7 +19,7 @@
 				<!--<h6>Your 360° Customer View</h6>-->
 				<div>
 					<form id="search-clients">
-						<input id="clientSearch" type="text" placeholder="Search..." />
+						<input id="clientSearch" type="text" placeholder="&#128269;" autocomplete="off" />
 					</form>
 				</div>
 				<ul>
@@ -69,10 +70,10 @@
     							<input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fas fa-eye"></i>
  							</label>
 							<label class="btn btn-secondary active">
-    							<input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-check"></i>
+    							<input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-plus-circle"></i>
   							</label>
 							<label class="btn btn-secondary">
-    							<input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-times"></i>
+    							<input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-minus-circle"></i>
   							</label>
 						</div>
 
@@ -167,7 +168,8 @@
 				<!--<input type="checkbox" id="hide">-->
 				<!--<label for="hide">Hide All</label>-->
 				<input id="addClientTicker" type="text" placeholder="Ticker" required/>
-				<input id="addClientName" type="text" placeholder="Client" required/>
+				<input id="addClientFirstName" type="text" placeholder="First Name" required/>
+				<input id="addClientLastName" type="text" placeholder="Last Name" required/>
 				<button id="addClientBtn">Add Client</button>
 			</form>
 
