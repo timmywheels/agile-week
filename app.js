@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //create elements
     var li = "<li>" +
-      						"<div class='stock'>"+tickerValue+"</div>" +
+      						"<div class='stock'>"+tickerValue.toUpperCase()+"</div>" +
       						"<span class='name'>"+nameValue+"</span>" +
       
       						"<i class='seeMore fa fa-chevron-left'></i>" +
