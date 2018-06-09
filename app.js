@@ -1,11 +1,12 @@
 /*global $*/
 
 //ALPHA_VANTAGE_KEY=HNFC0VWAW5DIOLLW
-
+var cookieArr = [];
+var savedCookieArr = [];
 
 var stock = {
   price: 0
-}
+};
 
 function tickerApi() {
 
@@ -47,16 +48,30 @@ function tickerApi() {
 
     stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
 
-    console.log('stock.price', stock.price)
+    console.log('stock.price', stock.price);
 
-  }
+  };
   // Send request to the server asynchronously
   xhr.send();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+  
+  
   const list = document.querySelector('#client-list ul');
+  
+  //Save Cookie
+    if(cookieArr != 0){
+      savedCookieArr.push(document.cookie.split(";"));
+    } 
+  
+  // //Publish the cookie
+  //   for (var i = 0; i < savedCookieArr.length; i++){
+  //     if (savedCookieArr[i].includes("<li>")){
+  //       $(list).append(savedCookieArr[i]);
+  //     }
+  //   }
+  
 
   //delete clients
   list.addEventListener('click', function(e) {
@@ -65,10 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but works
-
         list.removeChild(li);
-      };
-
+        
+      }
     }
     else {
       return false;
@@ -144,7 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
       "</li>";
 
     $(list).append(li);
-
+    cookieArr.push(li);
+    document.cookie = ""+cookieArr+"; expires=Tue, 19 Jan 2038 03:14:07 UTC;";
   });
 
   //filter clients and tickers
