@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
   });
+  
+  
 
   // Set consultant value from toggle
   var addClientBtn = document.getElementById('addClientBtn');
@@ -143,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "</div>" +
       "</li>";
 
-    $(list).append(li);
+    $(list).append(li).addClass("fadeIn");
 
   });
 
