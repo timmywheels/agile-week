@@ -45,12 +45,6 @@ function tickerApi() {
     // Log the data object
     console.log(data);
 
-    // console.log(data['Time Series (Daily)'][currentDate]['1. open']);
-
-    // console.log('time', data['Time Series (Daily)'][currentDate]);
-    // debugger;
-
-
     stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
 
     console.log('stock.price', stock.price)
