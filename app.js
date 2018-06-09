@@ -57,24 +57,31 @@ function tickerApi() {
 document.addEventListener('DOMContentLoaded', function() {
   
   var newCookie = document.cookie;
-  var savedCookieArr = [];
-  
+  var cookieArr = [];
+  var newCookieArr = [];
+  var newStr;
   
   const list = document.querySelector('#client-list ul');
   
-  // //Save Cookie
+  //Save Cookie
     if(newCookie != 0){
-      savedCookieArr.push(newCookie.split(";", "undefined"));
+      cookieArr.push(newCookie.split(";"));
     } 
     
-    console.log(savedCookieArr);
+    for (var i = 0; i < cookieArr[0].length; i++){
+      newCookieArr[i] = cookieArr[0][i].substr(cookieArr[0][i].indexOf("<"));
+      if (newCookieArr[i].length > 1){
+        $(list).append(newCookieArr[i]);
+      }
+    }
+    
+    console.log(newCookieArr);
+    
+    // /<.*?>$/gm
+    
   
-  // // //Publish the cookie
-    // for (var i = 0; i < savedCookieArr.length; i++){
-    //   if (savedCookieArr[i].includes("<li>")){
-    //     $(list).append(savedCookieArr[i]);
-    //   }
-    // }
+  //Publish the cookie
+
   
 
   //delete clients
@@ -164,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $(list).append(li);
     var myCookie = myCookie + li;
     
-    document.cookie = myCookie+"; expires=Tue, 19 Jan 2038 03:14:07 UTC;";
+    document.cookie = "cookies="+myCookie+"; expires=Tue, 19 Jan 2038 03:14:07 UTC;";
     
     console.log(document.cookie);
     
