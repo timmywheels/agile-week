@@ -75,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
   });
-  
-  
 
   // Set consultant value from toggle
   var addClientBtn = document.getElementById('addClientBtn');
@@ -145,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "</div>" +
       "</li>";
 
-    $(list).append(li).addClass("fadeIn");
+    $(list).append(li);
 
   });
 
@@ -196,3 +194,8 @@ function timeStamp() {
   } // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
 }
+
+
+$("#client-list-ul li").each(function(i) {
+    $(this).delay(400 * i).fadeIn(800);
+});
