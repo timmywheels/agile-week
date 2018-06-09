@@ -1,8 +1,7 @@
 /*global $*/
 
 //ALPHA_VANTAGE_KEY=HNFC0VWAW5DIOLLW
-var cookieArr = [];
-var savedCookieArr = [];
+
 
 var stock = {
   price: 0
@@ -57,20 +56,25 @@ function tickerApi() {
 
 document.addEventListener('DOMContentLoaded', function() {
   
+  var newCookie = document.cookie;
+  var savedCookieArr = [];
+  
   
   const list = document.querySelector('#client-list ul');
   
-  //Save Cookie
-    if(cookieArr != 0){
-      savedCookieArr.push(document.cookie.split(";"));
+  // //Save Cookie
+    if(newCookie != 0){
+      savedCookieArr.push(newCookie.split(";", "undefined"));
     } 
+    
+    console.log(savedCookieArr);
   
-  // //Publish the cookie
-  //   for (var i = 0; i < savedCookieArr.length; i++){
-  //     if (savedCookieArr[i].includes("<li>")){
-  //       $(list).append(savedCookieArr[i]);
-  //     }
-  //   }
+  // // //Publish the cookie
+    // for (var i = 0; i < savedCookieArr.length; i++){
+    //   if (savedCookieArr[i].includes("<li>")){
+    //     $(list).append(savedCookieArr[i]);
+    //   }
+    // }
   
 
   //delete clients
@@ -112,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     tickerApi();
 
-  })
+  });
 
   //add client-list
   const addForm = document.forms['add-client'];
@@ -158,9 +162,15 @@ document.addEventListener('DOMContentLoaded', function() {
       "</li>";
 
     $(list).append(li);
-    cookieArr.push(li);
-    document.cookie = ""+cookieArr+"; expires=Tue, 19 Jan 2038 03:14:07 UTC;";
+    var myCookie = myCookie + li;
+    
+    document.cookie = myCookie+"; expires=Tue, 19 Jan 2038 03:14:07 UTC;";
+    
+    console.log(document.cookie);
+    
+    
   });
+  
 
   //filter clients and tickers
   const searchBar = document.forms['search-clients'].querySelector('input');
