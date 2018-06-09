@@ -95,8 +95,21 @@ input {
     transition-property: box-shadow;
 }
 
+.stockPrice {
+    margin-left: 50px;
+    color: #fff !important;
+    font-weight: 700;
+    background: #45d372;
+    padding: 4px 8px;
+    border-radius: 4px;
+    float: right;
+    margin-right: 20px;
+    margin-top: 8px;
+}
+
 .firstName,
-.lastName {
+.lastName,
+.stockPrice {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #777;

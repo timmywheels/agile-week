@@ -1,5 +1,65 @@
 /*global $*/
 
+//ALPHA_VANTAGE_KEY=HNFC0VWAW5DIOLLW
+
+
+var stock = {
+  price: 0
+}
+
+function tickerApi() {
+
+  var d = new Date();
+  var month = d.getUTCMonth() + 1; //months from 1-12
+  var day = d.getUTCDate() - 1;
+  var year = d.getUTCFullYear();
+
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+
+  var currentDate = year + "-" + month + "-" + day;
+
+  console.log('currentDate:', currentDate);
+
+  var apiKey = 'HNFC0VWAW5DIOLLW';
+
+  var tickerSymbol = document.getElementById('addClientTicker').value;
+
+  var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + tickerSymbol + "&apikey=" + apiKey;
+
+  //Create a new object to interact with the server
+  var xhr = new XMLHttpRequest();
+
+  // Provide 3 arguments (GET/POST, The URL, Async True/False);
+  xhr.open('GET', url, false);
+
+  // Once request has loaded...
+  xhr.onload = function() {
+    // Parse the request into JSON
+    var data = JSON.parse(this.response);
+
+    // Log the data object
+    console.log(data);
+
+    // console.log(data['Time Series (Daily)'][currentDate]['1. open']);
+
+    // console.log('time', data['Time Series (Daily)'][currentDate]);
+    // debugger;
+
+
+    stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
+
+    console.log('stock.price', stock.price)
+
+  }
+  // Send request to the server asynchronously
+  xhr.send();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
@@ -22,15 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  // Toggle Client Info
-  // list.addEventListener('click', function(e) {
-  //   if (e.target.className == 'seeMore') {
-  //     e.target.parentElement.classList.remove('collapsed');
-  //   }
-  // })
-
-
-
   // Set consultant value from toggle
   var addClientBtn = document.getElementById('addClientBtn');
 
@@ -51,12 +102,9 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(consultantInitials);
     }
 
+    tickerApi();
+
   })
-
-
-
-
-
 
   //add client-list
   const addForm = document.forms['add-client'];
@@ -69,14 +117,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //create li elements
     var li = "<li>" +
-      "<div class='consultant'><p>" + consultantInitials + "</p></div>" +
-      "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" +
-      "<span class='firstName'>" + firstNameValue + "</span>" + ' ' +
-      "<span class='lastName'>" + lastNameValue + "</span>" +
-
-      "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" +
-      "<!--<span class='delete'> X </span>-->" +
-
+      "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
+      "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
+      "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
+      "<span class='lastName'>" + lastNameValue + "</span>" + // Last Name
+      "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
       "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
       "<label class='btn btn-secondary'>" +
       "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
@@ -84,13 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
       "</label>" +
       "<label class='btn btn-secondary active'>" +
       "<input type='radio' name='options' id='option2' autocomplete='off'>" +
-      "<i class='fas fa-check'></i>" +
+      "<i class='fas fa-plus'></i>" +
       "</label>" +
       "<label class='btn btn-secondary'>" +
       "<input type='radio' name='options' id='option3' autocomplete='off'>" +
-      "<i class='fas fa-times'></i>" +
+      "<i class='fas fa-minus'></i>" +
       "</label>" +
       "</div>" +
+      "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
       "<div class='collapse multi-collapse' id='clientInfo'>" +
       "<div class='card card-body'>" +
       "<div><i class='fas fa-user-tie'></i>" + ' ' +
@@ -151,48 +197,6 @@ function timeStamp() {
     if (time[i] < 10) {
       time[i] = "0" + time[i];
     }
-  }
-
-  // Return the formatted string
+  } // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
 }
-
-
-
-
-
-// const clientName = document.createElement('span');
-// const clientTicker = document.createElement('div');
-// // const deleteBtn = document.createElement('span');
-// const chevron = document.createElement('i');
-// const buttons = document.createElement('div');
-// const secondaryButton = document.createElement('label');
-// const buttonRadio = document.createElement('input');
-// const buttonIcon = document.createElement('i');
-
-
-// //add content
-// clientName.textContent = nameValue;
-// clientTicker.textContent = tickerValue.toUpperCase();
-// // deleteBtn.textContent = ' X ';
-
-// //add classes
-// clientName.classList.add('name');
-// clientTicker.classList.add('stock');
-// chevron.classList.add('seeMore', 'fa', 'fa-chevron-left');
-// buttons.classList.add('btn-group', 'btn-group-toggle')
-// buttons.attributes.d
-// secondaryButton.classList.add('btn-group', 'btn-secondary');
-// buttonRadio.typeof.add('radio');
-// buttonRadio.attributes.setNamedItem('options');
-// // deleteBtn.classList.add('delete');
-
-// //append to DOM
-
-// //append clientname to li
-// li.appendChild(clientTicker);
-// li.appendChild(clientName);
-//append delete button to li
-// li.appendChild(deleteBtn);
-
-//append completed li to list
