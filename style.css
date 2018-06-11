@@ -9,6 +9,8 @@ body {
     letter-spacing: 1px;
     height: 100vh;
     background-image: url('./client360-bg-1.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 h1,
