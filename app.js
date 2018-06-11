@@ -195,3 +195,8 @@ function timeStamp() {
   } // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
 }
+
+
+$("#client-list-ul li").each(function(i) {
+    $(this).delay(400 * i).fadeIn(800);
+});
