@@ -16,7 +16,7 @@ function uniqueClientId() {
 
 var stock = {
   price: 0
-}
+};
 
 function tickerApi() {
 
@@ -59,16 +59,17 @@ function tickerApi() {
 
     stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
 
-    console.log('stock.price', stock.price)
+    console.log('stock.price', stock.price);
 
-  }
+  };
   // Send request to the server asynchronously
   xhr.send();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+  
   const list = document.querySelector('#client-list ul');
+    
 
   //delete clients
   list.addEventListener('click', function(e) {
@@ -77,10 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but works
-
         list.removeChild(li);
-      };
-
+        
+      }
     }
     else {
       return false;
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     tickerApi();
 
-  })
+  });
 
   //add client-list
   const addForm = document.forms['add-client'];
@@ -120,9 +120,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstNameValue = addForm.querySelector('#addClientFirstName').value;
     const lastNameValue = addForm.querySelector('#addClientLastName').value;
     const tickerValue = addForm.querySelector('#addClientTicker').value;
-
+    var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
+    
     //create li elements
-    var li = "<li>" +
+    var li = "<li id='"+UniqueID+"'>" +
       "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
       "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
@@ -156,8 +157,15 @@ document.addEventListener('DOMContentLoaded', function() {
       "</li>";
 
     $(list).append(li);
-
+    
   });
+  
+  // /<.*?>$/gm
+  
+
+    
+  
+  
 
   //filter clients and tickers
   const searchBar = document.forms['search-clients'].querySelector('input');
