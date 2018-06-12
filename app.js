@@ -108,9 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstNameValue = addForm.querySelector('#addClientFirstName').value;
     const lastNameValue = addForm.querySelector('#addClientLastName').value;
     const tickerValue = addForm.querySelector('#addClientTicker').value;
-
+    var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
+    
     //create li elements
-    var li = "<li>" +
+    var li = "<li id='"+UniqueID+"'>" +
       "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
       "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
@@ -144,37 +145,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "</li>";
 
     $(list).append(li);
-    myCookie = newCookie + li;
-    updateCookie();
     
   });
   
   // /<.*?>$/gm
   
-  var newCookie = document.cookie;
-  // var cookieArr = [];
-  // var newCookieArr = [];
-  var myCookie;
-  
-  function updateCookie(){
-    document.cookie = "cookies="+myCookie+"; expires=Tue, 19 Jan 2038 03:14:07 UTC;";
-    newCookie = document.cookie;
-  }
-  
-  
-  //Save Cookie
-    // if(newCookie != 0){
-    //   cookieArr.push(newCookie.split(";"));
-    // } 
-    
-    // for (var i = 0; i < cookieArr[0].length; i++){
-    //   newCookieArr[i] = cookieArr[0][i].substr(cookieArr[0][i].indexOf("<"));
-    //   if (newCookieArr[i].length > 1){
-    //     $(list).append(newCookieArr[i]);
-    //   }
-    // }
-    
-    console.log(myCookie);
+
     
   
   
