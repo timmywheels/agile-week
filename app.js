@@ -2,6 +2,17 @@
 
 //ALPHA_VANTAGE_KEY=HNFC0VWAW5DIOLLW
 
+// Add unique ID to each LI
+
+var clientId = 4; // Starts at 4 because of the 4 initial clients that are populated
+
+function uniqueClientId() {
+  clientId += 1;
+  return 'client-' + clientId;
+
+};
+
+
 
 var stock = {
   price: 0
@@ -116,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
       "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
       "<span class='lastName'>" + lastNameValue + "</span>" + // Last Name
-      "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+      "<a href='#' data-target='#" + uniqueClientId() + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
       "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
       "<label class='btn btn-secondary'>" +
       "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
@@ -132,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "</label>" +
       "</div>" +
       "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
-      "<div class='collapse multi-collapse' id='clientInfo'>" +
+      "<div class='collapse multi-collapse' id='client-" + clientId + "'>" +
       "<div class='card card-body'>" +
       "<div><i class='fas fa-user-tie'></i>" + ' ' +
       "<p id='consultant'>" + consultantFullName + "</p>" + "</div>" +
@@ -197,6 +208,8 @@ function timeStamp() {
 }
 
 
+
+// Animate the LIs
 $("#client-list-ul li").each(function(i) {
-    $(this).delay(400 * i).fadeIn(800);
+  $(this).delay(400 * i).fadeIn(800);
 });
