@@ -11,7 +11,8 @@ function tickerApi() {
 
   var d = new Date();
   var month = d.getUTCMonth() + 1; //months from 1-12
-  var day = d.getUTCDate() - 1;
+  // var day = d.getUTCDate() - 1; // this works when date is reflecting a day ahead
+  var day = d.getUTCDate();
   var year = d.getUTCFullYear();
 
   if (day < 10) {
@@ -205,5 +206,5 @@ function timeStamp() {
 
 
 $("#client-list-ul li").each(function(i) {
-    $(this).delay(400 * i).fadeIn(800);
+  $(this).delay(400 * i).fadeIn(800);
 });
