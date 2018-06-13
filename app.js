@@ -53,14 +53,10 @@ function tickerApi() {
     // Log the data object
     console.log(data);
 
+    var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
+    stock.price = data['Time Series (1min)'][lastRefreshed]['4. close']
 
-    if (typeof data === undefined) {
-      console.log('yup')
-    };
-
-    stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
-    // stock.price = data['Time Series (1min)'][currentDate]['1. open'];
-    // console.log('xyz', data['Time Series(1min)'][0]);
+    // stock.price = data['Time Series (Daily)'][currentDate]['1. open']; // original api call
 
     console.log('stock.price', stock.price);
 
@@ -75,12 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   //delete clients
-  list.addEventListener('click', function(e) {
+  list.addEventListener('click', function(e) { // Alert user before deleting client
     if (e.target.className == 'delete') {
       if (confirm('Are you sure you want to delete this client?')) {
 
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
-        // Might not be the best solution, but works
+        // Might not be the best solution, but it works
         list.removeChild(li);
 
       }
@@ -91,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  // Set consultant value from toggle
   var addClientBtn = document.getElementById('addClientBtn');
 
-  var consultantInitials = '';
-  var consultantFullName = '';
+  var consultantInitials = ''; // Initialize consultant initials variable
+  var consultantFullName = ''; // Initialize consultant full name variable
 
+  // Set consultant value from toggle in add client section
   addClientBtn.addEventListener('click', function() {
 
     if (document.getElementById('arnell').parentElement.classList.contains('active')) {
@@ -111,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(consultantInitials);
     }
 
-    tickerApi();
+    tickerApi(); // Run API call
 
   });
 
@@ -120,9 +116,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   addForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const firstNameValue = addForm.querySelector('#addClientFirstName').value;
-    const lastNameValue = addForm.querySelector('#addClientLastName').value;
-    const tickerValue = addForm.querySelector('#addClientTicker').value;
+
+    const tickerValue = addForm.querySelector('#addClientTicker').value; // Add stock ticker
+    const firstNameValue = addForm.querySelector('#addClientFirstName').value; // Add client first name
+    const lastNameValue = addForm.querySelector('#addClientLastName').value; // Add client last name
+
     var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
 
     //create li elements
@@ -135,15 +133,15 @@ document.addEventListener('DOMContentLoaded', function() {
       "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
       "<label class='btn btn-secondary'>" +
       "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
-      "<i class='fas fa-eye'></i>" +
+      "<i class='fas fa-eye'></i>" + // Watching Button
       "</label>" +
       "<label class='btn btn-secondary active'>" +
       "<input type='radio' name='options' id='option2' autocomplete='off'>" +
-      "<i class='fas fa-plus'></i>" +
+      "<i class='fas fa-plus'></i>" + // Purchased Button
       "</label>" +
       "<label class='btn btn-secondary'>" +
       "<input type='radio' name='options' id='option3' autocomplete='off'>" +
-      "<i class='fas fa-minus'></i>" +
+      "<i class='fas fa-minus'></i>" + // Sold Button
       "</label>" +
       "</div>" +
       "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
@@ -167,10 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-  // Filter clients and tickers
+  // Filter clients and tickers in search bar
   const searchBar = document.forms['search-clients'].querySelector('input');
   searchBar.addEventListener('keyup', function(e) {
     const term = e.target.value.toLowerCase();
@@ -189,36 +184,30 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Create timestamp
-function timeStamp() {
-  // Create a date object with the current time
-  var now = new Date();
-
-  // Create an array with the current month, day and time
-  var date = [now.getMonth() + 1, now.getDate(), now.getFullYear()];
-
-  // Create an array with the current hour, minute and second
-  var time = [now.getHours(), now.getMinutes(), now.getSeconds()];
-
-  // Determine AM or PM suffix based on the hour
-  var suffix = (time[0] < 12) ? "AM" : "PM";
-
-  // Convert hour from military time
-  time[0] = (time[0] < 12) ? time[0] : time[0] - 12;
-
-  // If hour is 0, set it to 12
-  time[0] = time[0] || 12;
-
-  // If seconds and minutes are less than 10, add a zero
-  for (var i = 1; i < 3; i++) {
-    if (time[i] < 10) {
-      time[i] = "0" + time[i];
-    }
-  } // Return the formatted string
-  return date.join("/") + " " + time.join(":") + " " + suffix;
-}
 
 // Animate the LIs
 $("#client-list-ul li").each(function(i) {
   $(this).delay(400 * i).fadeIn(800);
 });
+
+// Create timestamp for Client Info section
+function timeStamp() {
+  var now = new Date();
+
+  var date = [now.getMonth() + 1, now.getDate(), now.getFullYear()];
+
+  var time = [now.getHours(), now.getMinutes(), now.getSeconds()];
+
+  var suffix = (time[0] < 12) ? "AM" : "PM";
+
+  time[0] = (time[0] < 12) ? time[0] : time[0] - 12;
+
+  time[0] = time[0] || 12;
+
+  for (var i = 1; i < 3; i++) {
+    if (time[i] < 10) {
+      time[i] = "0" + time[i];
+    }
+  }
+  return date.join("/") + " " + time.join(":") + " " + suffix;
+}
