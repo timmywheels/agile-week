@@ -7,4 +7,5 @@ Framework: Bootstrap | [Docs](http://getbootstrap.com/docs/4.1/getting-started/i
 
 Branch naming convention: [version]-[initials], example: v1-tw
 
+QA Testing Branch: qa-testing
 
