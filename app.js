@@ -147,26 +147,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $(list).append(li);
     
+//Input values get saved into an array
     cookieArr = [UniqueID, consultantInitials, tickerValue.toUpperCase(), firstNameValue, lastNameValue];
     
-    
+//Input values gets saved into a cookie with the UNIQUEID as the cookiename
     document.cookie = UniqueID+"="+cookieArr+"; expires=Tue, 19 Jan 2038 03:14:07 UTC";
-    
-    console.log(document.cookie);
-    console.log(newCookieArr);
-    console.log(publishedCookie);
   });
   
-  // /<.*?>$/gm
+// The following code deals with the cookies
+
+//myCookie is the saved cookie, cookieArr is defined outside of the submit elemenet in case we need it later
   var cookieArr;
   var myCookie = document.cookie;
   var newCookieArr = [];
   var publishedCookie = [];
   
+//the cookie string is split into an array of each element
   if (myCookie != ""){
     newCookieArr.push(document.cookie.split(";"));
   }
-  
+
+//this loop splits the form pieces into their own arrays
   for (var i = 0; i < newCookieArr[0].length; i++){
     console.log(publishedCookie);
     if (newCookieArr[0][i] != undefined){
@@ -174,6 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
+//this code appends the individual pieces into the li and then appends the li to the DOM
+//This loop starts at 2 because the cookie will always save browser info as the first 2 items of the array, useless for the code
+
   for (var i = 2; i < publishedCookie.length; i++){
     if (publishedCookie[i].includes("c9") == false){
       
@@ -182,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "<div class='stock'>" + publishedCookie[i][2] + "</div>" + // Stock Ticker
         "<span class='firstName'>" + publishedCookie[i][3] + "</span>" + ' ' + // First Name
         "<span class='lastName'>" + publishedCookie[i][4] + "</span>" + // Last Name
-        "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+          "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
@@ -209,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "</div>" +
         "</div>" +
         "</li>";
+
       
         $(list).append(li);
     }
