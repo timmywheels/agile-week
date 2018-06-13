@@ -146,12 +146,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $(list).append(li);
     
+    cookieArr = [UniqueID, consultantInitials, tickerValue.toUpperCase(), firstNameValue, lastNameValue];
+    
+    
+    document.cookie = UniqueID+"="+cookieArr+"; expires=Tue, 19 Jan 2038 03:14:07 UTC";
+    
+    console.log(document.cookie);
+    console.log(newCookieArr);
+    console.log(publishedCookie);
   });
   
   // /<.*?>$/gm
+  var cookieArr;
+  var myCookie = document.cookie;
+  var newCookieArr = [];
+  var publishedCookie = [];
   
-
-    
+  if (myCookie != ""){
+    newCookieArr.push(document.cookie.split(";"));
+  }
+  
+  for (var i = 0; i < newCookieArr[0].length; i++){
+    console.log(publishedCookie);
+    if (newCookieArr[0][i] != undefined){
+      publishedCookie.push(newCookieArr[0][i].split(","));
+    }
+  }
+  
+  for (var i = 2; i < publishedCookie.length; i++){
+    if (publishedCookie[i].includes("c9") == false){
+      
+      var li = "<li id='"+ publishedCookie[i][0] +"'>" +
+        "<div class='consultant'><p>" + publishedCookie[i][1] + "</p></div>" + // Consultant
+        "<div class='stock'>" + publishedCookie[i][2] + "</div>" + // Stock Ticker
+        "<span class='firstName'>" + publishedCookie[i][3] + "</span>" + ' ' + // First Name
+        "<span class='lastName'>" + publishedCookie[i][4] + "</span>" + // Last Name
+        "<a href='#clientInfo' data-toggle='collapse'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+        "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+        "<label class='btn btn-secondary'>" +
+        "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+        "<i class='fas fa-eye'></i>" +
+        "</label>" +
+        "<label class='btn btn-secondary active'>" +
+        "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+        "<i class='fas fa-plus'></i>" +
+        "</label>" +
+        "<label class='btn btn-secondary'>" +
+        "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+        "<i class='fas fa-minus'></i>" +
+        "</label>" +
+        "</div>" +
+        "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
+        "<div class='collapse multi-collapse' id='clientInfo'>" +
+        "<div class='card card-body'>" +
+        "<div><i class='fas fa-user-tie'></i>" + ' ' +
+        "<p id='consultant'>" + consultantFullName + "</p>" + "</div>" +
+        "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
+        "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
+        "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+        "<div><span class='timeStamp'><p>Created: " + timeStamp() + "</p></span><span class='delete'> X </span></div>" +
+        "</div>" +
+        "</div>" +
+        "</li>";
+      
+        $(list).append(li);
+    }
+  }
+  
+  
+  
+  
+  
+  
   
   
 
