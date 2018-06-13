@@ -12,8 +12,6 @@ function uniqueClientId() {
 
 };
 
-
-
 var stock = {
   price: 0
 };
@@ -21,7 +19,7 @@ var stock = {
 function tickerApi() {
 
   var d = new Date();
-  var month = d.getUTCMonth() + 1; //months from 1-12
+  var month = d.getUTCMonth() + 1; //months from 1-12, months are 0-based
   // var day = d.getUTCDate() - 1; // this works when date is reflecting a day ahead
   var day = d.getUTCDate();
   var year = d.getUTCFullYear();
@@ -41,7 +39,7 @@ function tickerApi() {
 
   var tickerSymbol = document.getElementById('addClientTicker').value;
 
-  var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + tickerSymbol + "&apikey=" + apiKey;
+  var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey;
 
   //Create a new object to interact with the server
   var xhr = new XMLHttpRequest();
@@ -57,7 +55,14 @@ function tickerApi() {
     // Log the data object
     console.log(data);
 
+
+    if (typeof data === undefined) {
+      console.log('yup')
+    };
+
     stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
+    // stock.price = data['Time Series (1min)'][currentDate]['1. open'];
+    // console.log('xyz', data['Time Series(1min)'][0]);
 
     console.log('stock.price', stock.price);
 
@@ -67,9 +72,9 @@ function tickerApi() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  
+
   const list = document.querySelector('#client-list ul');
-    
+
 
   //delete clients
   list.addEventListener('click', function(e) {
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but works
         list.removeChild(li);
-        
+
       }
     }
     else {
@@ -121,9 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const lastNameValue = addForm.querySelector('#addClientLastName').value;
     const tickerValue = addForm.querySelector('#addClientTicker').value;
     var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
-    
+
     //create li elements
-    var li = "<li id='"+UniqueID+"'>" +
+    var li = "<li id='" + UniqueID + "'>" +
       "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
       "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
@@ -157,17 +162,17 @@ document.addEventListener('DOMContentLoaded', function() {
       "</li>";
 
     $(list).append(li);
-    
+
   });
-  
+
   // /<.*?>$/gm
-  
 
-    
-  
-  
 
-  //filter clients and tickers
+
+
+
+
+  // Filter clients and tickers
   const searchBar = document.forms['search-clients'].querySelector('input');
   searchBar.addEventListener('keyup', function(e) {
     const term = e.target.value.toLowerCase();
@@ -214,8 +219,6 @@ function timeStamp() {
   } // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
 }
-
-
 
 // Animate the LIs
 $("#client-list-ul li").each(function(i) {
