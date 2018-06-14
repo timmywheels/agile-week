@@ -1,17 +1,29 @@
-/*global $ config*/
+/*global $*/
+
+//ALPHA_VANTAGE_KEY=HNFC0VWAW5DIOLLW
+
 
 var stock = {
   price: 0
-};
+}
+
+
+
+
+
+
+
+
+
+
 
 function tickerApi() {
 
   var d = new Date();
   var month = d.getUTCMonth() + 1; //months from 1-12
-  // var day = d.getUTCDate() - 1; // this works when date is reflecting a day ahead
-  var day = d.getUTCDate();
+  var day = d.getUTCDate() - 1; // this works when date is reflecting a day ahead
+  // var day = d.getUTCDate();
   var year = d.getUTCFullYear();
-
   if (day < 10) {
     day = '0' + day;
   }
@@ -23,7 +35,7 @@ function tickerApi() {
 
   console.log('currentDate:', currentDate);
 
-  var apiKey = config.API;
+  var apiKey = 'HNFC0VWAW5DIOLLW';
 
   var tickerSymbol = document.getElementById('addClientTicker').value;
 
@@ -33,29 +45,45 @@ function tickerApi() {
   var xhr = new XMLHttpRequest();
 
   // Provide 3 arguments (GET/POST, The URL, Async True/False);
-  xhr.open('GET', url, false);
+ xhr.open('GET', url, false);
+  
 
   // Once request has loaded...
   xhr.onload = function() {
     // Parse the request into JSON
     var data = JSON.parse(this.response);
-
-    // Log the data object
-    console.log(data);
-
+    
+    if(data.hasOwnProperty("Error Message")){
+      //console.log('not valid stock');
+      alert("Invalid stock");
+      //var btn = document.getElementById('addClientBtn');
+      //btn.style.backgroundColor = 'red';
+    }
+     
+    // else Log the data object
+    else{
     stock.price = data['Time Series (Daily)'][currentDate]['1. open'];
-
     console.log('stock.price', stock.price);
-
+    }
   };
   // Send request to the server asynchronously
   xhr.send();
 }
 
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
-  
+
   const list = document.querySelector('#client-list ul');
-    
 
   //delete clients
   list.addEventListener('click', function(e) {
@@ -64,9 +92,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but works
+
         list.removeChild(li);
-        
-      }
+      };
+
     }
     else {
       return false;
@@ -96,20 +125,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     tickerApi();
 
-  });
+  })
+
+
+
+
+
+
+
+
+
 
   //add client-list
+  
+  
   const addForm = document.forms['add-client'];
 
   addForm.addEventListener('submit', function(e) {
     e.preventDefault();
+    if (stock.price === 0){
+      console.log('Not working');
+    }
+    else {
     const firstNameValue = addForm.querySelector('#addClientFirstName').value;
     const lastNameValue = addForm.querySelector('#addClientLastName').value;
     const tickerValue = addForm.querySelector('#addClientTicker').value;
-    var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
-    
+
     //create li elements
-    var li = "<li id='"+UniqueID+"'>" +
+    var li = "<li>" +
       "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
       "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
       "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
@@ -141,17 +184,16 @@ document.addEventListener('DOMContentLoaded', function() {
       "</div>" +
       "</div>" +
       "</li>";
-
-    $(list).append(li);
+      
+       $(list).append(li);
     
+    }
   });
-  
-  // /<.*?>$/gm
-  
 
-    
-  
-  
+
+
+
+
 
   //filter clients and tickers
   const searchBar = document.forms['search-clients'].querySelector('input');
