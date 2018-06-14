@@ -144,12 +144,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $(list).append(li);
     
+    $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
+    
 //Input values get saved into an array
     cookieArr = [UniqueID, consultantInitials, tickerValue.toUpperCase(), firstNameValue, lastNameValue];
     
 //Input values get saved into a cookie with the UNIQUEID as the cookiename
 //Cookies get saved as a Key=Value pairs, Key name is the CookieID while the CookieArr is the value. Cookies need an expiration so I gave them one far down the line
     document.cookie = UniqueID+"="+cookieArr+"; expires=Tue, 19 Jan 2038 03:14:07 UTC";
+    
+//This code clears the input fields
+    $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
   });
   
 // The following code deals with the cookies
