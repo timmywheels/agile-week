@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clients = list.getElementsByTagName('li');
 
     Array.from(clients).forEach(function(client) {
-      const title = client.innerText;
+      const title = client.textContent;
       if (title.toLowerCase().indexOf(term) != -1) {
         client.style.display = 'block';
       }
