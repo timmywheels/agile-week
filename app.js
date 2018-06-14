@@ -1,7 +1,4 @@
-/*global $*/
-
-//ALPHA_VANTAGE_KEY=HNFC0VWAW5DIOLLW
-
+/*global $ config*/
 
 var stock = {
   price: 0
@@ -26,7 +23,7 @@ function tickerApi() {
 
   console.log('currentDate:', currentDate);
 
-  var apiKey = 'HNFC0VWAW5DIOLLW';
+  var apiKey = config.API;
 
   var tickerSymbol = document.getElementById('addClientTicker').value;
 
