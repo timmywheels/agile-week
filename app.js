@@ -147,24 +147,25 @@ document.addEventListener('DOMContentLoaded', function() {
 //Input values get saved into an array
     cookieArr = [UniqueID, consultantInitials, tickerValue.toUpperCase(), firstNameValue, lastNameValue];
     
-//Input values gets saved into a cookie with the UNIQUEID as the cookiename
+//Input values get saved into a cookie with the UNIQUEID as the cookiename
+//Cookies get saved as a Key=Value pairs, Key name is the CookieID while the CookieArr is the value. Cookies need an expiration so I gave them one far down the line
     document.cookie = UniqueID+"="+cookieArr+"; expires=Tue, 19 Jan 2038 03:14:07 UTC";
   });
   
 // The following code deals with the cookies
 
-//myCookie is the saved cookie, cookieArr is defined outside of the submit elemenet in case we need it later
-  var cookieArr;
-  var myCookie = document.cookie;
-  var newCookieArr = [];
-  var publishedCookie = [];
+//"myCookie" is the saved cookie, cookieArr is defined outside of the submit elemenet in case we need it later
+  var cookieArr; //This value is defined globally in case we need to use it later. It is empty on page load and only poluates with info on click
+  var myCookie = document.cookie; //This variable gives a name to the cookie and allows it to be manipulated
+  var newCookieArr = []; //This array is set so that the cookie can be split into separate strings by the semicolon
+  var publishedCookie = []; //This array further splits the cookies into sub arrays which will be published (we can probably combine both array methods)
   
-//the cookie string is split into an array of each element
-  if (myCookie != ""){
-    newCookieArr.push(document.cookie.split(";"));
+//the cookie string is split into an array of each client info entered into the system
+  if (myCookie != ""){ 
+    newCookieArr.push(document.cookie.split(";")); //it is split by the semicolon
   }
 
-//this loop splits the form pieces into their own arrays
+//this loop splits the Cookie array into sub arrays so that the values can be pulled into the DOM
   for (var i = 0; i < newCookieArr[0].length; i++){
     console.log(publishedCookie);
     if (newCookieArr[0][i] != undefined){
@@ -172,8 +173,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-//this code appends the individual pieces into the li and then appends the li to the DOM
-//This loop starts at 2 because the cookie will always save browser info as the first 2 items of the array, useless for the code
+//The below code appends the individual pieces into the li and then appends the li to the DOM
+//This loop starts at 2 because the cookie saves some browser info as the first 2 items of the array (May have to use regex instead in the future)
 
   for (var i = 2; i < publishedCookie.length; i++){
     if (publishedCookie[i].includes("c9") == false){
