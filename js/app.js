@@ -170,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
       $(list).append(li); // Append the li to client-list
 
       request.result = ''; // Reset request.result
+      
+      $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
     }
 
   });
