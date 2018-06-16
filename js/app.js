@@ -176,10 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
         client : 'client-' + clientId,
         consultant : consultantInitials,
         ticker : tickerValue.toUpperCase(),
-        Fname : firstNameValue,
-        Lname : lastNameValue,
+        firstName : firstNameValue,
+        lastName : lastNameValue,
         consultantName : consultantFullName,
-        timeStamp : timeStamp()
+        timeStamp : timeStamp
       };
       
       localSave('client-'+clientId, JSON.stringify(storage));
@@ -191,6 +191,48 @@ function localSave(key, value){
   localStorage.setItem(key, value);
 }
 
+if (localStorage[0] != ""){
+  for (var i = 0; i < localStorage.length; i++){
+    var stored = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    
+    console.log(stored);
+    var newLi = "<li id='" + stored.client + "'>" +
+        "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
+        "<div class='stock'>" + stored.ticker + "</div>" + // Stock Ticker
+        "<span class='firstName'>" + stored.firstName + "</span>" + ' ' + // First Name
+        "<span class='lastName'>" + stored.lastName + "</span>" + // Last Name
+        "<a href='#' data-target='#client-" + stored.client + "' data-toggle='collapse' aria-controls='client-" + stored.client + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+        "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+        "<label class='btn btn-secondary'>" +
+        "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+        "<i class='fas fa-eye'></i>" + // Watching Button
+        "</label>" +
+        "<label class='btn btn-secondary active'>" +
+        "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+        "<i class='fas fa-plus'></i>" + // Purchased Button
+        "</label>" +
+        "<label class='btn btn-secondary'>" +
+        "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+        "<i class='fas fa-minus'></i>" + // Sold Button
+        "</label>" +
+        "</div>" +
+        "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
+        "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
+        "<div class='card card-body'>" +
+        "<div><i class='fas fa-user-tie'></i>" + ' ' +
+        "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
+        "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
+        "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
+        "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+        "<div><span class='timeStamp'><p>Created: " + stored.timeStamp + "</p></span><span class='delete'> X </span></div>" +
+        "</div>" +
+        "</div>" +
+        "</li>";
+        
+        $(list).append(newLi);
+    
+  }
+}
 
   // Filter clients and tickers in search bar
   const searchBar = document.forms['search-clients'].querySelector('input');
