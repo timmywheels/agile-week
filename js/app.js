@@ -67,7 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but it works
         list.removeChild(li);
-
+        
+        //This code goes into local storage and removes the KEY which matches the ID found in the LI that was just deleted
+        localStorage.removeItem(li.id);
+        
       }
     }
     else {
@@ -172,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
       
+      // this variable creates an object which will be stored
       var storage = {
         client : 'client-' + clientId,
         consultant : consultantInitials,
@@ -182,20 +186,23 @@ document.addEventListener('DOMContentLoaded', function() {
         timeStamp : timeStamp
       };
       
+      //local save is a function which takes the clientID as the key and the storage object as the value
       localSave('client-'+clientId, JSON.stringify(storage));
     }
 
   });
 
+//Local storage function with key value pair. I saved it ouside of the function that creates new LIs to keep it neat
 function localSave(key, value){
   localStorage.setItem(key, value);
 }
 
-if (localStorage[0] != ""){
-  for (var i = 0; i < localStorage.length; i++){
-    var stored = JSON.parse(localStorage.getItem(localStorage.key(i)));
+//this function appends the saved local storage items
+if (localStorage[0] != ""){ //As long as the localStorage is not empty...
+  for (var i = 0; i < localStorage.length; i++){ //loop through local storage
+    var stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
     
-    console.log(stored);
+//The below appends all the items in local storage to the li and pushed the li to the DOM
     var newLi = "<li id='" + stored.client + "'>" +
         "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
         "<div class='stock'>" + stored.ticker + "</div>" + // Stock Ticker
@@ -230,9 +237,9 @@ if (localStorage[0] != ""){
         "</li>";
         
         $(list).append(newLi);
-    
   }
 }
+  
 
   // Filter clients and tickers in search bar
   const searchBar = document.forms['search-clients'].querySelector('input');
