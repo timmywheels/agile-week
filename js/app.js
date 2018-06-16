@@ -67,7 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but it works
         list.removeChild(li);
-
+        
+        //This code goes into local storage and removes the KEY which matches the ID found in the LI that was just deleted
+        localStorage.removeItem(li.id);
+        
       }
     }
     else {
@@ -131,15 +134,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const firstNameValue = addForm.querySelector('#addClientFirstName').value; // Add client first name
       const lastNameValue = addForm.querySelector('#addClientLastName').value; // Add client last name
 
-      var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
 
       //create li elements
-      var li = "<li id='" + UniqueID + "'>" +
+      var li = "<li id='" + uniqueClientId() + "'>" +
         "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
         "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
         "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
         "<span class='lastName'>" + lastNameValue + "</span>" + // Last Name
-        "<a href='#' data-target='#" + uniqueClientId() + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+        "<a href='#' data-target='#client-" + clientId + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' autocomplete='off' checked>" +
@@ -171,12 +173,74 @@ document.addEventListener('DOMContentLoaded', function() {
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
+      
+      $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
+      
+      // this variable creates an object which will be stored
+      var storage = {
+        client : 'client-' + clientId,
+        consultant : consultantInitials,
+        ticker : tickerValue.toUpperCase(),
+        firstName : firstNameValue,
+        lastName : lastNameValue,
+        consultantName : consultantFullName,
+        timeStamp : timeStamp
+      };
+      
+      //local save is a function which takes the clientID as the key and the storage object as the value
+      localSave('client-'+clientId, JSON.stringify(storage));
     }
 
   });
 
-  // /<.*?>$/gm
+//Local storage function with key value pair. I saved it ouside of the function that creates new LIs to keep it neat
+function localSave(key, value){
+  localStorage.setItem(key, value);
+}
 
+//this function appends the saved local storage items
+if (localStorage[0] != ""){ //As long as the localStorage is not empty...
+  for (var i = 0; i < localStorage.length; i++){ //loop through local storage
+    var stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
+    
+//The below appends all the items in local storage to the li and pushed the li to the DOM
+    var newLi = "<li id='" + stored.client + "'>" +
+        "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
+        "<div class='stock'>" + stored.ticker + "</div>" + // Stock Ticker
+        "<span class='firstName'>" + stored.firstName + "</span>" + ' ' + // First Name
+        "<span class='lastName'>" + stored.lastName + "</span>" + // Last Name
+        "<a href='#' data-target='#client-" + stored.client + "' data-toggle='collapse' aria-controls='client-" + stored.client + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+        "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+        "<label class='btn btn-secondary'>" +
+        "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+        "<i class='fas fa-eye'></i>" + // Watching Button
+        "</label>" +
+        "<label class='btn btn-secondary active'>" +
+        "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+        "<i class='fas fa-plus'></i>" + // Purchased Button
+        "</label>" +
+        "<label class='btn btn-secondary'>" +
+        "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+        "<i class='fas fa-minus'></i>" + // Sold Button
+        "</label>" +
+        "</div>" +
+        "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
+        "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
+        "<div class='card card-body'>" +
+        "<div><i class='fas fa-user-tie'></i>" + ' ' +
+        "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
+        "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
+        "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
+        "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+        "<div><span class='timeStamp'><p>Created: " + stored.timeStamp + "</p></span><span class='delete'> X </span></div>" +
+        "</div>" +
+        "</div>" +
+        "</li>";
+        
+        $(list).append(newLi);
+  }
+}
+  
 
   // Filter clients and tickers in search bar
   const searchBar = document.forms['search-clients'].querySelector('input');
