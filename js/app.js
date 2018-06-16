@@ -131,15 +131,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const firstNameValue = addForm.querySelector('#addClientFirstName').value; // Add client first name
       const lastNameValue = addForm.querySelector('#addClientLastName').value; // Add client last name
 
-      var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
 
       //create li elements
-      var li = "<li id='" + UniqueID + "'>" +
+      var li = "<li id='" + uniqueClientId() + "'>" +
         "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
         "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
         "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
         "<span class='lastName'>" + lastNameValue + "</span>" + // Last Name
-        "<a href='#' data-target='#" + uniqueClientId() + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+        "<a href='#' data-target='#client-" + clientId + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
@@ -172,11 +171,25 @@ document.addEventListener('DOMContentLoaded', function() {
       request.result = ''; // Reset request.result
       
       $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
+      
+      var storage = {
+        client : 'client-' + clientId,
+        consultant : consultantInitials,
+        ticker : tickerValue.toUpperCase(),
+        Fname : firstNameValue,
+        Lname : lastNameValue,
+        consultantName : consultantFullName,
+        timeStamp : timeStamp()
+      };
+      
+      localSave('client-'+clientId, JSON.stringify(storage));
     }
 
   });
 
-  // /<.*?>$/gm
+function localSave(key, value){
+  localStorage.setItem(key, value);
+}
 
 
   // Filter clients and tickers in search bar
