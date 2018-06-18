@@ -213,43 +213,47 @@ function localSave(key, value){
 //this function appends the saved local storage items
 if (localStorage[0] != ""){ //As long as the localStorage is not empty...
   for (var i = 0; i < localStorage.length; i++){ //loop through local storage
-    var stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
-    
-//The below appends all the items in local storage to the li and pushed the li to the DOM
-    var newLi = "<li id='" + stored.client + "'>" +
-        "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
-        "<div class='stock'>" + stored.ticker + "</div>" + // Stock Ticker
-        "<span class='firstName'>" + stored.firstName + "</span>" + ' ' + // First Name
-        "<span class='lastName'>" + stored.lastName + "</span>" + // Last Name
-        "<a href='#' data-target='#client-" + stored.client + "' data-toggle='collapse' aria-controls='client-" + stored.client + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
-        "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
-        "<label class='btn btn-secondary'>" +
-        "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
-        "<i class='fas fa-eye'></i>" + // Watching Button
-        "</label>" +
-        "<label class='btn btn-secondary active'>" +
-        "<input type='radio' name='options' id='option2' autocomplete='off'>" +
-        "<i class='fas fa-plus'></i>" + // Purchased Button
-        "</label>" +
-        "<label class='btn btn-secondary'>" +
-        "<input type='radio' name='options' id='option3' autocomplete='off'>" +
-        "<i class='fas fa-minus'></i>" + // Sold Button
-        "</label>" +
-        "</div>" +
-        "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
-        "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
-        "<div class='card card-body'>" +
-        "<div><i class='fas fa-user-tie'></i>" + ' ' +
-        "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
-        "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
-        "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
-        "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
-        "<div><span class='timeStamp'><p>Created: " + stored.timeStamp + "</p></span><span class='delete'> X </span></div>" +
-        "</div>" +
-        "</div>" +
-        "</li>";
+    (function (i) {
+      setTimeout(function () {
+        var stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
         
-        $(list).append(newLi);
+        //The below appends all the items in local storage to the li and pushed the li to the DOM
+        var newLi = "<li id='" + stored.client + "'>" +
+            "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
+            "<div class='stock'>" + stored.ticker + "</div>" + // Stock Ticker
+            "<span class='firstName'>" + stored.firstName + "</span>" + ' ' + // First Name
+            "<span class='lastName'>" + stored.lastName + "</span>" + // Last Name
+            "<a href='#' data-target='#client-" + stored.client + "' data-toggle='collapse' aria-controls='client-" + stored.client + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+            "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+            "<label class='btn btn-secondary'>" +              "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+            "<i class='fas fa-eye'></i>" + // Watching Button
+            "</label>" +
+            "<label class='btn btn-secondary active'>" +
+            "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+            "<i class='fas fa-plus'></i>" + // Purchased Button
+            "</label>" +
+            "<label class='btn btn-secondary'>" +
+            "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+            "<i class='fas fa-minus'></i>" + // Sold Button
+            "</label>" +
+            "</div>" +
+            "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
+            "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
+            "<div class='card card-body'>" +
+            "<div><i class='fas fa-user-tie'></i>" + ' ' +
+            "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
+            "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
+            "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
+            "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+            "<div><span class='timeStamp'><p>Created: " + stored.timeStamp + "</p></span><span class='delete'> X </span></div>" +
+            "</div>" +
+            "</div>" +
+            "</li>";
+              
+              $(list).append(newLi).fadeIn(800);
+              
+        }, 400 * i);
+    })(i);
   }
 }
   
@@ -274,11 +278,10 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
 });
 
 
-
-// Animate the LIs
-$("#client-list-ul li").each(function(i) {
-  $(this).delay(400 * i).fadeIn(800);
-});
+// // Animate the LIs
+// $("#client-list-ul li").each(function(i) {
+//   $(this).delay(400 * i).fadeIn(800);
+// });
 
 // Create timestamp for Client Info section
 function timeStamp() {
