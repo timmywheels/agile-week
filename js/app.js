@@ -213,7 +213,7 @@ function localSave(key, value){
 //this function appends the saved local storage items
 if (localStorage[0] != ""){ //As long as the localStorage is not empty...
   for (var i = 0; i < localStorage.length; i++){ //loop through local storage
-    (function (i) {
+    (function (i) { //new function to delay the loop
       setTimeout(function () {
         var stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
         
@@ -250,9 +250,9 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
             "</div>" +
             "</li>";
               
-              $(list).append(newLi).fadeIn(800);
+              $(list).append(newLi).fadeIn(800); //fade in each li
               
-        }, 400 * i);
+        }, 400 * i); //delay each li 400 milliseconds
     })(i);
   }
 }
