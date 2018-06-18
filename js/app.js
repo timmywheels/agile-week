@@ -44,7 +44,7 @@ function tickerApi() {
       var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
 
       // Set stock.price to the latest ticker price that was reported
-      stock.price = data['Time Series (1min)'][lastRefreshed]['4. close']
+      stock.price = data['Time Series (1min)'][lastRefreshed]['4. close'];
 
       // console.log('stock.price', stock.price);
     }
@@ -57,7 +57,6 @@ function tickerApi() {
 document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
-
 
   //delete clients
   list.addEventListener('click', function(e) { // Alert user before deleting client
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Increment clientId everytime an LI is added to the list
     clientId += 1;
     return 'client-' + clientId;
-  };
+  }
 
   var addClientBtn = document.getElementById('addClientBtn');
 
@@ -123,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if the stock ticker is valid
     if (request.result === 'Error') {
       $("#errorMsg").fadeIn().delay(2000).fadeOut(); // Otherwise display error
-      console.log('There was an error.')
+      console.log('There was an error.');
       request.result = ''; // Reset request.result
     }
 
@@ -147,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "<input type='radio' name='options' autocomplete='off' checked>" +
         "<i class='fas fa-eye'></i>" + // Watching Button
         "</label>" +
-        "<label class='btn btn-secondary active'>" +
+        "<label class='btn btn-secondary active '>" +
         "<input type='radio' name='options' autocomplete='off'>" +
         "<i class='fas fa-plus'></i>" + // Purchased Button
         "</label>" +
@@ -168,8 +167,12 @@ document.addEventListener('DOMContentLoaded', function() {
         "</ul>" +
         "</div>" +
         "</li>";
+        
+      
+        //Append li to ul
+     $(list).append(li);
+     
 
-      $(list).append(li); // Append the li to client-list
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
@@ -238,6 +241,8 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
         "</li>";
         
         $(list).append(newLi);
+ 
+
   }
 }
   
@@ -262,9 +267,10 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
 
 
 
-// Animate the LIs
-$("#client-list-ul > li").each(function(i) {
-  $(this).delay(400 * i).fadeIn(800);
+
+// Animate the LIs - used jquery sorry!
+$("#client-list ul").children().each(function(i) {
+  $(this).delay(400 * i).hide().fadeIn(800);
 });
 
 // Create timestamp for Client Info section
