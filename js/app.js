@@ -8,13 +8,20 @@ var request = {
   result: '',
 };
 
+var stored;
+
 function tickerApi() {
+  
+  var tickerSymbol;
+  
+  if (document.getElementById('addClientTicker').value == ""){
+    tickerSymbol = stored.ticker;
+  } else {
+    tickerSymbol = document.getElementById('addClientTicker').value;
+  }
 
   // Set the API key
   var apiKey = config.API;
-
-  // Get the ticker symbol from the user
-  var tickerSymbol = document.getElementById('addClientTicker').value;
 
   var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey;
 
@@ -44,7 +51,7 @@ function tickerApi() {
       var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
 
       // Set stock.price to the latest ticker price that was reported
-      stock.price = data['Time Series (1min)'][lastRefreshed]['4. close']
+      stock.price = data['Time Series (1min)'][lastRefreshed]['4. close'];
 
       // console.log('stock.price', stock.price);
     }
@@ -53,6 +60,30 @@ function tickerApi() {
   // Send request to the server asynchronously
   xhr.send();
 }
+
+
+// function LocalStorageTickerAPI (){
+//   var apiKey = config.API;
+//   var tickerSymbol = stored.ticker;
+//   var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey;
+//   console.log(url);
+//   var xhr = new XMLHttpRequest();
+
+//   xhr.open('GET', url, false);
+
+//   xhr.onload = function() {
+
+//     var data = JSON.parse(this.response);
+//     var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
+//     stock.price = data['Time Series (1min)'][lastRefreshed]['4. close'];
+
+//   };
+//   // Send request to the server asynchronously
+//   xhr.send();
+// }
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -81,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add unique ID to each LI
   // Starts at 4 because of the 4 initial clients that are populated
-  var clientId = 4;
+  var clientId = 0;
   var storedID = []; //This array will be used to store the clientids pulled from localStorage
       
   function uniqueClientId() {
@@ -136,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if the stock ticker is valid
     if (request.result === 'Error') {
       $("#errorMsg").fadeIn().delay(2000).fadeOut(); // Otherwise display error
-      console.log('There was an error.')
+      console.log('There was an error.');
       request.result = ''; // Reset request.result
     }
 
@@ -214,9 +245,10 @@ function localSave(key, value){
 if (localStorage[0] != ""){ //As long as the localStorage is not empty...
   for (var i = 0; i < localStorage.length; i++){ //loop through local storage
     (function (i) { //new function to delay the loop
+     
       setTimeout(function () {
-        var stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
-        
+        stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
+        tickerApi();
         //The below appends all the items in local storage to the li and pushed the li to the DOM
         var newLi = "<li id='" + stored.client + "'>" +
             "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
@@ -250,12 +282,38 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
             "</div>" +
             "</li>";
               
-              $(list).append(newLi).fadeIn(800); //fade in each li
+            // ticker = stored.ticker;
+            // LocalStorageTickerAPI();
+            
+            
+            $(list).append(newLi).fadeIn(800); //fade in each li
               
-        }, 400 * i); //delay each li 400 milliseconds
+              
+              
+              
+        }, 1000 * i); //delay each li 400 milliseconds
     })(i);
   }
 }
+
+// var ticker;
+// var price;
+// var lastRefreshed;
+              
+// function LocalStorageTickerAPI(){
+// var apiKey = config.API;
+// var tickerSymbol = ticker;
+
+// $.ajax({
+//   url: "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey,
+//   dataType: 'json',
+//   async: false,
+//   success: function(pricing){
+//     lastRefreshed = pricing['Meta Data']['3. Last Refreshed'];
+//     price = pricing['Time Series (1min)'][lastRefreshed]['4. close'];
+//     }
+//   });
+// }
   
 
   // Filter clients and tickers in search bar
