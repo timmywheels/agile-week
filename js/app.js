@@ -92,8 +92,23 @@ document.addEventListener('DOMContentLoaded', function() {
     return 'client-' + clientId;
   }
   
+  var faplusID = 4;
+  function plusID(){
+    faplusID +=1;
+    return 'faplus-'+ faplusID;
+  }
   
+  var faminusID = 4;
+  function minusID(){
+    faminusID +=1;
+    return 'faminus-'+ faminusID;
+  }
   
+  var quantity = 4;
+  function totQuant(){
+    quantity += 1;
+    return 'quant-'+quantity;
+  }
   
 
   var addClientBtn = document.getElementById('addClientBtn');
@@ -157,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
         "<label class='btn btn-secondary'>"+
         "<input type='radio' name='options' autocomplete='off'>"+
-        "<i class= 'quantity'>1</i>"+
+        "<i id='#"+totQuant()+"'class= 'quantity'>1</i>"+
         "</label>"+
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' autocomplete='off' checked>" +
@@ -165,11 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
         "</label>" +
         "<label class='btn btn-secondary active'>" +
         "<input type='radio' name='options' autocomplete='off'>" +
-        "<i class='fas fa-plus'></i>" + // Purchased Button
+        "<i id='#"+plusID()+"' class='fas fa-plus'></i>" + // Purchased Button
         "</label>" +
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' autocomplete='off'>" +
-        "<i class='fas fa-minus'></i>" + // Sold Button
+        "<i id='#"+minusID()+"'class='fas fa-minus'></i>" + // Sold Button
         "</label>" +
         "</div>" +
         "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
@@ -192,13 +207,10 @@ document.addEventListener('DOMContentLoaded', function() {
       request.result = ''; // Reset request.result
       
       const yes = document.querySelector('#client-list-ul');
-      //var qa = document.querySelector("#client-list-ul li:nth-child(1) #collapseOne label:nth-child(1) i");
-      //var ok14 = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling
-      //var ok16 = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild
       var qa = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.nextSibling
+      var addID= document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.getAttribute('id')
       console.log(typeof qa);
       console.log(qa);
-
 
 
 
@@ -209,9 +221,10 @@ yes.addEventListener('click', function(e){
   console.log(where);
   console.log(clientId);
   if(where === "#client-"+clientId){
-  if(e.target.className === 'fas fa-plus'){
+  if(e.target.getAttribute('id') === "#faplus-"+(faplusID)){
+    var quantlocation = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.nextElementSibling
     var change = parseInt(qa.textContent);
-    if(change >= 1){
+    if(quantlocation.getAttribute('id') === "#quant-"+(quantity) ){
       console.log(qa.textContent);
       console.log(typeof change);
       console.log(change);
@@ -244,7 +257,7 @@ yes.addEventListener('click', function(e){
     }
       }
       
-     if(e.target.className === 'fas fa-minus'){
+     if(e.target.getAttribute('id') === "#faminus-"+(faminusID)){
       var change = parseInt(qa.textContent);
        if(change > 1){
       console.log('yes');
