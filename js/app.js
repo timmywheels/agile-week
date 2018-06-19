@@ -207,8 +207,10 @@ document.addEventListener('DOMContentLoaded', function() {
       request.result = ''; // Reset request.result
       
       const yes = document.querySelector('#client-list-ul');
-      var qa = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.nextSibling
+      //var qa = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.nextSibling
+      var qa = document.getElementById("#quant-"+(quantity));
       var addID= document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.getAttribute('id')
+      console.log(addID);
       console.log(typeof qa);
       console.log(qa);
 
@@ -216,15 +218,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 yes.addEventListener('click', function(e){
   //e.preventDefault();
-  
   var where = e.target.parentElement.parentElement.previousElementSibling.getAttribute('data-target');
   console.log(where);
   console.log(clientId);
   if(where === "#client-"+clientId){
   if(e.target.getAttribute('id') === "#faplus-"+(faplusID)){
-    var quantlocation = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.nextElementSibling
     var change = parseInt(qa.textContent);
-    if(quantlocation.getAttribute('id') === "#quant-"+(quantity) ){
+    if(qa.getAttribute('id') === "#quant-"+(quantity) ){
       console.log(qa.textContent);
       console.log(typeof change);
       console.log(change);
@@ -245,15 +245,24 @@ yes.addEventListener('click', function(e){
       var stockPrix = parseInt(period);
       console.log(stockPrix);
       
-      //if(add <= 2){
-      var times = stockPrix * add;
+      if(add <= 2){
+      var times = stockPrix + (stockPrix);
       console.log(times);
       var addQuotes = ""+times+"";
       console.log(addQuotes);
       var final = "$"+addQuotes.slice(0,-2)+"."+addQuotes.slice(-2,addQuotes.length);
       console.log(final);
       stockTot.textContent = final;
-      
+      }
+      else {
+      times = (stockPrix) + (stockPrix/(add-1));
+      console.log(times);
+      addQuotes = ""+times+"";
+      console.log(addQuotes);
+      final = "$"+addQuotes.slice(0,-2)+"."+addQuotes.slice(-2,addQuotes.length);
+      console.log(final);
+      stockTot.textContent = final;
+      }
     }
       }
       
