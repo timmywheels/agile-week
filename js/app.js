@@ -54,6 +54,8 @@ function tickerApi() {
   xhr.send();
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
@@ -75,6 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
   });
+  
+  
+  
+  
 
   // Add unique ID to each LI
   // Starts at 4 because of the 4 initial clients that are populated
@@ -84,7 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Increment clientId everytime an LI is added to the list
     clientId += 1;
     return 'client-' + clientId;
-  };
+  }
+  
+  
+  
+  
 
   var addClientBtn = document.getElementById('addClientBtn');
 
@@ -109,6 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
     tickerApi(); // Run API call
 
   });
+  
+  
+  
+  
 
   // Add client-list
   const addForm = document.forms['add-client'];
@@ -141,6 +155,10 @@ document.addEventListener('DOMContentLoaded', function() {
         "<span class='lastName'>" + lastNameValue + "</span>" + // Last Name
         "<a href='#' data-target='#" + uniqueClientId() + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+        "<label class='btn btn-secondary'>"+
+        "<input type='radio' name='options' autocomplete='off'>"+
+        "<i class= 'quantity'>1</i>"+
+        "</label>"+
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' autocomplete='off' checked>" +
         "<i class='fas fa-eye'></i>" + // Watching Button
@@ -162,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "<div><i class='fas fa-phone'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Phone</em></li></div>" +
         "<div><i class='fas fa-envelope'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Email</em></li></div>" +
         "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Address</em></li></div>" +
+        "<div><i class='fas fa-chart-line'></i>"+''+"<li class='stockTot'>"+" $"+parseFloat(stock.price).toFixed(2)  +"</li></div>"+
         "<div><span class='timeStamp'><p>Created: " + timeStamp() + "</p></span><span class='delete'> X </span></div>" +
         "</ul>" +
         "</div>" +
@@ -171,11 +190,107 @@ document.addEventListener('DOMContentLoaded', function() {
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
+      
+      const yes = document.querySelector('#client-list-ul');
+      //var qa = document.querySelector("#client-list-ul li:nth-child(1) #collapseOne label:nth-child(1) i");
+      //var ok14 = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling
+      //var ok16 = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild
+      var qa = document.querySelector("#client-list-ul").lastElementChild.lastElementChild.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.nextSibling
+      console.log(typeof qa);
+      console.log(qa);
+
+
+
+
+yes.addEventListener('click', function(e){
+  //e.preventDefault();
+  
+  var where = e.target.parentElement.parentElement.previousElementSibling.getAttribute('data-target');
+  console.log(where);
+  console.log(clientId);
+  if(where === "#client-"+clientId){
+  if(e.target.className === 'fas fa-plus'){
+    var change = parseInt(qa.textContent);
+    if(change >= 1){
+      console.log(qa.textContent);
+      console.log(typeof change);
+      console.log(change);
+      var add = change + 1;
+      console.log(add);
+      var quotes = ""+add+"";
+      console.log(quotes);
+      qa.textContent = add ;
+      
+      
+      var stockTot = document.querySelector("#client-"+clientId+" "+"ul .stockTot");
+      console.log(stockTot.textContent);
+      console.log(typeof stockTot.textContent);
+      var commas = stockTot.textContent.replace(",","");
+      var dollas = commas.replace("$","");
+      var period = dollas.replace(".","");
+      console.log(period);
+      var stockPrix = parseInt(period);
+      console.log(stockPrix);
+      
+      //if(add <= 2){
+      var times = stockPrix * add;
+      console.log(times);
+      var addQuotes = ""+times+"";
+      console.log(addQuotes);
+      var final = "$"+addQuotes.slice(0,-2)+"."+addQuotes.slice(-2,addQuotes.length);
+      console.log(final);
+      stockTot.textContent = final;
+      
     }
+      }
+      
+     if(e.target.className === 'fas fa-minus'){
+      var change = parseInt(qa.textContent);
+       if(change > 1){
+      console.log('yes');
+      var subtract = change - 1;
+      var quotes = ""+ subtract +"";
+      qa.textContent = subtract;
+      
+      
+      var stockTot2 = document.querySelector("#client-"+clientId+" "+"ul .stockTot");
+      console.log(stockTot2.textContent);
+      //console.log(typeof stockTot.textContent);
+      var commas2 = stockTot2.textContent.replace(",","");
+      var dollas2 = commas2.replace("$","");
+      var period2 = dollas2.replace(".","");
+      console.log(period2);
+      var stockPrix2 = parseInt(period2);
+      console.log(stockPrix2);
+      console.log(subtract);
+      //console.log(typeof stockPrix);
+      if(subtract === 1){
+      var deduct = stockPrix2 / 2;
+      console.log(deduct);
+      var addQuotes2 = ""+deduct+"";
+      var final2 = "$"+addQuotes2.slice(0,-2)+"."+addQuotes2.slice(-2,addQuotes2.length);
+      console.log(final2);
+      stockTot2.textContent = final2;
+      }
+      else{
+      var takeAway = stockPrix2 - (stockPrix2/(subtract+1));
+      console.log(takeAway);
+      var addQuotes3 = ""+takeAway+"";
+      var final3 = "$"+addQuotes3.slice(0,-2)+"."+addQuotes3.slice(-2,addQuotes3.length);
+      console.log(final3);
+      stockTot2.textContent = final3;
+      }
+      }
+       }  
+  }
+     
+});
+    }
+    
 
   });
 
-  // /<.*?>$/gm
+
 
 
   // Filter clients and tickers in search bar
@@ -195,6 +310,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+
 
 
 
@@ -227,6 +345,8 @@ function timeStamp() {
 
 
 
+
+
 // Editable Client Info Fields
 
 function editClientInfo() {
@@ -244,3 +364,105 @@ function editClientInfo() {
 }
 
 editClientInfo();
+
+
+
+
+
+
+// Add & Subtract from Quantity w/ changing stock total
+/*
+const yes = document.querySelector('#client-list-ul');
+var qa = document.querySelector("#client-list-ul li:nth-child(1) #collapseOne label:nth-child(1) i");
+console.log(typeof qa);
+console.log(qa);
+
+
+
+
+yes.addEventListener('click', function(e){
+  //e.preventDefault();
+  var where = e.target.parentElement.parentElement.previousElementSibling.getAttribute('data-target');
+  console.log(where);
+  if(where ==='#client-1'){
+  if(e.target.className === 'fas fa-plus'){
+    var change = parseInt(qa.textContent);
+    if(change >= 1){
+      console.log(qa.textContent);
+      console.log(typeof change);
+      console.log(change);
+      var add = change + 1;
+      console.log(add);
+      var quotes = ""+add+"";
+      console.log(quotes);
+      qa.textContent = add ;
+      
+      
+      var stockTot = document.querySelector('#client-1 ul .stockTot');
+      console.log(stockTot.textContent);
+      console.log(typeof stockTot.textContent);
+      var commas = stockTot.textContent.replace(",","");
+      var dollas = commas.replace("$","");
+      var period = dollas.replace(".","");
+      console.log(period);
+      var stockPrix = parseInt(period);
+      console.log(stockPrix);
+      
+      //if(add <= 2){
+      var times = stockPrix * add;
+      console.log(times);
+      var addQuotes = ""+times+"";
+      console.log(addQuotes);
+      var final = "$"+addQuotes.slice(0,-2)+"."+addQuotes.slice(-2,addQuotes.length);
+      console.log(final);
+      stockTot.textContent = final;
+      
+    }
+      }
+      
+     if(e.target.className === 'fas fa-minus'){
+      var change = parseInt(qa.textContent);
+       if(change > 1){
+      console.log('yes');
+      var subtract = change - 1;
+      var quotes = ""+ subtract +"";
+      qa.textContent = subtract;
+      
+      
+      var stockTot2 = document.querySelector('#client-1 ul .stockTot');
+      console.log(stockTot2.textContent);
+      //console.log(typeof stockTot.textContent);
+      var commas2 = stockTot2.textContent.replace(",","");
+      var dollas2 = commas2.replace("$","");
+      var period2 = dollas2.replace(".","");
+      console.log(period2);
+      var stockPrix2 = parseInt(period2);
+      console.log(stockPrix2);
+      console.log(subtract);
+      //console.log(typeof stockPrix);
+      if(subtract === 1){
+      var deduct = stockPrix2 / 2;
+      console.log(deduct);
+      var addQuotes2 = ""+deduct+"";
+      var final2 = "$"+addQuotes2.slice(0,-2)+"."+addQuotes2.slice(-2,addQuotes2.length);
+      console.log(final2);
+      stockTot2.textContent = final2;
+      }
+      else{
+      var takeAway = stockPrix2 - (stockPrix2/(subtract+1));
+      console.log(takeAway);
+      var addQuotes3 = ""+takeAway+"";
+      var final3 = "$"+addQuotes3.slice(0,-2)+"."+addQuotes3.slice(-2,addQuotes3.length);
+      console.log(final3);
+      stockTot2.textContent = final3;
+      }
+      }
+       }  
+  }
+     
+});
+
+*/
+
+
+
