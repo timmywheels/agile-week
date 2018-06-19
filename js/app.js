@@ -61,30 +61,6 @@ function tickerApi() {
   xhr.send();
 }
 
-
-// function LocalStorageTickerAPI (){
-//   var apiKey = config.API;
-//   var tickerSymbol = stored.ticker;
-//   var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey;
-//   console.log(url);
-//   var xhr = new XMLHttpRequest();
-
-//   xhr.open('GET', url, false);
-
-//   xhr.onload = function() {
-
-//     var data = JSON.parse(this.response);
-//     var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
-//     stock.price = data['Time Series (1min)'][lastRefreshed]['4. close'];
-
-//   };
-//   // Send request to the server asynchronously
-//   xhr.send();
-// }
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
@@ -227,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
         firstName : firstNameValue,
         lastName : lastNameValue,
         consultantName : consultantFullName,
-        timeStamp : timeStamp
+        TimeStamp : timeStamp(),
       };
       
       //local save is a function which takes the clientID as the key and the storage object as the value
@@ -277,44 +253,20 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
             "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
             "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
             "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
-            "<div><span class='timeStamp'><p>Created: " + stored.timeStamp + "</p></span><span class='delete'> X </span></div>" +
+            "<div><span class='timeStamp'><p>Created: " + stored.TimeStamp + "</p></span><span class='delete'> X </span></div>" +
             "</div>" +
             "</div>" +
             "</li>";
-              
-            // ticker = stored.ticker;
-            // LocalStorageTickerAPI();
-            
             
             $(list).append(newLi).fadeIn(800); //fade in each li
               
               
               
               
-        }, 1000 * i); //delay each li 400 milliseconds
+        }, 400 * i); //delay each li 400 milliseconds
     })(i);
   }
 }
-
-// var ticker;
-// var price;
-// var lastRefreshed;
-              
-// function LocalStorageTickerAPI(){
-// var apiKey = config.API;
-// var tickerSymbol = ticker;
-
-// $.ajax({
-//   url: "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey,
-//   dataType: 'json',
-//   async: false,
-//   success: function(pricing){
-//     lastRefreshed = pricing['Meta Data']['3. Last Refreshed'];
-//     price = pricing['Time Series (1min)'][lastRefreshed]['4. close'];
-//     }
-//   });
-// }
-  
 
   // Filter clients and tickers in search bar
   const searchBar = document.forms['search-clients'].querySelector('input');
@@ -334,12 +286,6 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
     });
   });
 });
-
-
-// // Animate the LIs
-// $("#client-list-ul li").each(function(i) {
-//   $(this).delay(400 * i).fadeIn(800);
-// });
 
 // Create timestamp for Client Info section
 function timeStamp() {
