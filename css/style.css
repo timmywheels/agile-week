@@ -13,6 +13,11 @@ body {
     background-attachment: fixed;
 }
 
+li input {
+    border: none;
+    letter-spacing: 1px;
+}
+
 h1,
 h2 {
     font-weight: normal;
@@ -54,6 +59,14 @@ input {
     font-size: 12px;
     color: #777;
     line-height: 15px;
+}
+
+.card-body li {
+    display: inline-block;
+    font-size: 12px;
+    color: #777;
+    line-height: 15px;
+    margin-bottom: 15px !important;
 }
 
 .logo {
@@ -171,17 +184,17 @@ input {
     margin: 30px;
 }
 
-#client-list ul,
-#tabbed-content ul {
+#client-list-ul,
+#tabbed-content-ul {
     list-style-type: none;
     padding: 0;
 }
 
-#client-list ul li:last-child {
+#client-list-ul li:last-child {
     border-bottom: none;
 }
 
-#client-list ul {
+#client-list #client-list-ul {
     min-width: 500px;
     background: #fffbfb;
     padding: 20px 20px 0;
@@ -193,13 +206,28 @@ input {
     transition-property: box-shadow;
 }
 
+.client-info-ul li {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    list-style: none;
+}
+
+.client-info-ul>div>li {
+    margin-bottom: 1rem !important;
+}
 
 
-#client-list li {
+.multi-collapse {
+    margin-bottom: 20px;
+}
+
+#client-list-ul li {
     margin-bottom: 10px;
     border-bottom: 2px solid #f5f5f5;
 
 }
+
+
 
 #client-list li:hover {}
 

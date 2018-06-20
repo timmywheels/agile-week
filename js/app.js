@@ -164,32 +164,33 @@ document.addEventListener('DOMContentLoaded', function() {
         "<a href='#' data-target='#client-" + clientId + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
         "<label class='btn btn-secondary'>" +
-        "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+        "<input type='radio' name='options' autocomplete='off' checked>" +
         "<i class='fas fa-eye'></i>" + // Watching Button
         "</label>" +
         "<label class='btn btn-secondary active'>" +
-        "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+        "<input type='radio' name='options' autocomplete='off'>" +
         "<i class='fas fa-plus'></i>" + // Purchased Button
         "</label>" +
         "<label class='btn btn-secondary'>" +
-        "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+        "<input type='radio' name='options' autocomplete='off'>" +
         "<i class='fas fa-minus'></i>" + // Sold Button
         "</label>" +
         "</div>" +
         "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
         "<div class='collapse multi-collapse' id='client-" + clientId + "'>" +
-        "<div class='card card-body'>" +
+        "<ul class='client-info-ul card card-body'>" +
         "<div><i class='fas fa-user-tie'></i>" + ' ' +
         "<p id='consultant'>" + consultantFullName + "</p>" + "</div>" +
-        "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
-        "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
-        "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+        "<div><i class='fas fa-phone'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Phone</em></li></div>" +
+        "<div><i class='fas fa-envelope'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Email</em></li></div>" +
+        "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Address</em></li></div>" +
         "<div><span class='timeStamp'><p>Created: " + timeStamp() + "</p></span><span class='delete'> X </span></div>" +
-        "</div>" +
+        "</ul>" +
         "</div>" +
         "</li>";
 
       $(list).append(li); // Append the li to client-list
+      editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
       
@@ -276,7 +277,7 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
     const clients = list.getElementsByTagName('li');
 
     Array.from(clients).forEach(function(client) {
-      const title = client.textContent;
+      const title = client.innerText;
       if (title.toLowerCase().indexOf(term) != -1) {
         client.style.display = 'block';
       }
@@ -286,6 +287,7 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
     });
   });
 });
+
 
 // Create timestamp for Client Info section
 function timeStamp() {
@@ -308,3 +310,23 @@ function timeStamp() {
   }
   return date.join("/") + " " + time.join(":") + " " + suffix;
 }
+
+
+
+// Editable Client Info Fields
+
+function editClientInfo() {
+  var originalVal;
+  $(".client-info-ul").on('dblclick', 'li', function() {
+    originalVal = $(this).text();
+    $(this).text("");
+    $("<input type='text'>").appendTo(this).focus();
+  });
+  $(".client-info-ul").on('focusout', 'li > input', function() {
+    var $this = $(this);
+    $this.parent().text($this.val() || originalVal);
+    $this.remove(); // Don't just hide, remove the element.
+  });
+}
+
+editClientInfo();
