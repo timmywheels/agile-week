@@ -2,16 +2,21 @@
 <html>
 
 	<head>
+		
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Client360 | Your 360° Customer View </title>
 		<link rel=icon href="img/favicon.ico" sizes="16x16" type="image/png">
 		<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet">
-		<link rel="stylesheet" href="css/style.css" type="text/css" />
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
 		<link rel="stylesheet" href="css/animate.css" type="text/css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-		<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+		 <!--Material Design Bootstrap -->
+		<link href="css/mdb.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		
+	
 	</head>
 
 	<body>
@@ -20,8 +25,11 @@
 				<img src="img/client360-logo-alt.png" alt="Client360 Logo" class="logo">
 				<!--<h6>Your 360° Customer View</h6>-->
 				<div>
-					<form id="search-clients">
-						<input id="clientSearch" type="text" placeholder="&#128269;" autocomplete="off" />
+				
+					<form id="search-clients" class="md-form form-lg">
+						<!-- removed placeholder="&#128269;" -->
+							<i class="fas fa-search prefix"></i>
+						<input id="clientSearch" type="text" class="form-control"  autocomplete="off" />
 					</form>
 				</div>
 				<ul id="client-list-ul">
@@ -217,7 +225,9 @@
 					</li>
 				</ul>
 			</div>
+			
 			<h6>Add Client</h6>
+		
 			<form id="add-client">
 				<div id="selectConsultant" class="btn-group btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active">
@@ -229,18 +239,25 @@
                   <p>RF</p>
                </label>
 				</div>
+				<div class="md-form">
 				<input id="addClientTicker" type="text" placeholder="Ticker" required autocomplete="off" />
-				<input id="addClientFirstName" type="text" placeholder="First Name" required autocomplete="off" />
-				<input id="addClientLastName" type="text" placeholder="Last Name" required autocomplete="off" />
-				<button id="addClientBtn"><i class="fas fa-plus"></i></button>
-			</form>
+				<input id="addClientFirstName" type="text" placeholder="First Name" required autocomplete="off"/>
+				<input id="addClientLastName" type="text" placeholder="Last Name" required autocomplete="off"  />
+				<button id="addClientBtn"><i class="fas fa-plus"></i></button></div>
+			</div>
 			<div id="errorMsg">Please enter a valid stock ticker.</div>
+		</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="js/config.js"></script>
 		<script src="js/app.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+		 <!--Bootstrap tooltips -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+		 <!--MDB core JavaScript -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+		
 	</body>
 
 </html>
