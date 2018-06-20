@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
+      $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
     }
 
   });
