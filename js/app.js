@@ -67,9 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Might not be the best solution, but it works
         list.removeChild(li);
         
-        //This code goes into local storage and removes the KEY which matches the ID found in the LI that was just deleted
-        localStorage.removeItem(li.id);
-        
       }
     }
     else {
@@ -86,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Increment clientId everytime an LI is added to the list
     clientId += 1;
     return 'client-' + clientId;
-  }
+  };
 
   var addClientBtn = document.getElementById('addClientBtn');
 
@@ -133,20 +130,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const firstNameValue = addForm.querySelector('#addClientFirstName').value; // Add client first name
       const lastNameValue = addForm.querySelector('#addClientLastName').value; // Add client last name
 
+      var UniqueID = consultantInitials + tickerValue + firstNameValue + lastNameValue;
 
       //create li elements
-      var li = "<li id='" + uniqueClientId() + "'>" +
+      var li = "<li id='" + UniqueID + "'>" +
         "<div class='consultant'><p>" + consultantInitials + "</p></div>" + // Consultant
         "<div class='stock'>" + tickerValue.toUpperCase() + "</div>" + // Stock Ticker
         "<span class='firstName'>" + firstNameValue + "</span>" + ' ' + // First Name
         "<span class='lastName'>" + lastNameValue + "</span>" + // Last Name
-        "<a href='#' data-target='#client-" + clientId + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+        "<a href='#' data-target='#" + uniqueClientId() + "' data-toggle='collapse' aria-controls='client-" + clientId + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
         "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
         "<label class='btn btn-secondary'>" +
         "<input type='radio' name='options' autocomplete='off' checked>" +
         "<i class='fas fa-eye'></i>" + // Watching Button
         "</label>" +
-        "<label class='btn btn-secondary active '>" +
+        "<label class='btn btn-secondary active'>" +
         "<input type='radio' name='options' autocomplete='off'>" +
         "<i class='fas fa-plus'></i>" + // Purchased Button
         "</label>" +
@@ -167,12 +165,8 @@ document.addEventListener('DOMContentLoaded', function() {
         "</ul>" +
         "</div>" +
         "</li>";
-        
-      
-        //Append li to ul
-     $(list).append(li);
-     
-
+		
+      $(list).append(li); // Append the li to client-list
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
