@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchBar = document.forms['search-clients'].querySelector('input');
   searchBar.addEventListener('keyup', function(e) {
     const term = e.target.value.toLowerCase();
-    const clients = list.getElementsByTagName('li');
+    const clients = $('#client-list-ul>li');
 
     Array.from(clients).forEach(function(client) {
       const title = client.innerText;
