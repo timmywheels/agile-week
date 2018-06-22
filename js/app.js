@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but it works
         list.removeChild(li);
-        
+
       }
     }
     else {
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "</ul>" +
         "</div>" +
         "</li>";
-		
+
       $(list).append(li); // Append the li to client-list
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
