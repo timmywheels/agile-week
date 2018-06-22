@@ -44,7 +44,7 @@ function tickerApi() {
       var lastRefreshed = data['Meta Data']['3. Last Refreshed'];
 
       // Set stock.price to the latest ticker price that was reported
-      stock.price = data['Time Series (1min)'][lastRefreshed]['4. close']
+      stock.price = data['Time Series (1min)'][lastRefreshed]['4. close'];
 
       // console.log('stock.price', stock.price);
     }
@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
 
-
   //delete clients
   list.addEventListener('click', function(e) { // Alert user before deleting client
     if (e.target.className == 'delete') {
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but it works
         list.removeChild(li);
-
+        
       }
     }
     else {
@@ -120,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if the stock ticker is valid
     if (request.result === 'Error') {
       $("#errorMsg").fadeIn().delay(2000).fadeOut(); // Otherwise display error
-      console.log('There was an error.')
+      console.log('There was an error.');
       request.result = ''; // Reset request.result
     }
 
@@ -166,11 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
         "</ul>" +
         "</div>" +
         "</li>";
-
+		
       $(list).append(li); // Append the li to client-list
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
+      $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
     }
 
   });
