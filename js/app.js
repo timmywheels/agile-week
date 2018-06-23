@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add unique ID to each LI
   // Starts at 4 because of the 4 initial clients that are populated
-  var clientId = 4;
+  var clientId = 0;
 
   function uniqueClientId() {
     // Increment clientId everytime an LI is added to the list
