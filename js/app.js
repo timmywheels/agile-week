@@ -206,7 +206,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
   });
-
+  
+//Local storage function with key value pair. I saved it ouside of the function that creates new LIs to keep it neat
+function localSave(key, value){
+  localStorage.setItem(key, value);
+}
 
 //this function appends the saved local storage items
 if (localStorage[0] != ""){ //As long as the localStorage is not empty...
