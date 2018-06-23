@@ -85,12 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add unique ID to each LI
   // Starts at 4 because of the 4 initial clients that are populated
   var clientId = 0;
-
+  var storedID = []; //This array will be used to store the clientids pulled from localStorage
+      
   function uniqueClientId() {
+    
     // Increment clientId everytime an LI is added to the list
-    clientId += 1;
-    return 'client-' + clientId;
-  };
+    for (var i = 0; i < localStorage.length; i++){ //This function loops through local storage
+      var pedro = JSON.parse(localStorage.getItem(localStorage.key(i))); // pedro opens up local storage and grabs each key=value pair
+      storedID.push(pedro.client); //This code grabs the clientId saved in the "client" section of the object. The UniqueIds are pushed to the storedID array
+    }
+    
+    do { //The do while loop will execute the statement is false
+      clientId += 1; //Client ID will go up 1 each time this loop executes
+    } while (storedID.includes('client-' + clientId)); //if the client-ID exists in the storedID array pulled from localStorage, then loop again until false
+    
+    return 'client-' + clientId; //Once the loop above is complete then clientId now equals a uniqueID
+    
+  }
 
   var addClientBtn = document.getElementById('addClientBtn');
 
