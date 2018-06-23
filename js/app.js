@@ -8,13 +8,20 @@ var request = {
   result: '',
 };
 
+var stored;
+
 function tickerApi() {
+  
+  var tickerSymbol;
+  
+  if (document.getElementById('addClientTicker').value == ""){
+    tickerSymbol = stored.ticker;
+  } else {
+    tickerSymbol = document.getElementById('addClientTicker').value;
+  }
 
   // Set the API key
   var apiKey = config.API;
-
-  // Get the ticker symbol from the user
-  var tickerSymbol = document.getElementById('addClientTicker').value;
 
   var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + tickerSymbol + "&interval=1min&fastperiod=10&apikey=" + apiKey;
 
@@ -165,21 +172,83 @@ document.addEventListener('DOMContentLoaded', function() {
         "</ul>" +
         "</div>" +
         "</li>";
-
+        
       $(list).append(li); // Append the li to client-list
       editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
       $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
+      
+      // this variable creates an object which will be stored
+      var storage = {
+        client : 'client-' + clientId,
+        consultant : consultantInitials,
+        ticker : tickerValue.toUpperCase(),
+        firstName : firstNameValue,
+        lastName : lastNameValue,
+        consultantName : consultantFullName,
+        TimeStamp : timeStamp(),
+      };
+      
+      //local save is a function which takes the clientID as the key and the storage object as the value
+      localSave('client-'+ clientId, JSON.stringify(storage));
     }
 
   });
 
-  // /<.*?>$/gm
 
+//this function appends the saved local storage items
+if (localStorage[0] != ""){ //As long as the localStorage is not empty...
+  for (var i = 0; i < localStorage.length; i++){ //loop through local storage
+    (function (i) { //new function to delay the loop
+     
+      setTimeout(function () {
+        stored = JSON.parse(localStorage.getItem(localStorage.key(i))); //parse the JSON file and get item whose key matches the current loop location
+        tickerApi();
+        //The below appends all the items in local storage to the li and pushed the li to the DOM
+        var newLi = "<li id='" + stored.client + "'>" +
+            "<div class='consultant'><p>" + stored.consultant + "</p></div>" + // Consultant
+            "<div class='stock'>" + stored.ticker + "</div>" + // Stock Ticker
+            "<span class='firstName'>" + stored.firstName + "</span>" + ' ' + // First Name
+            "<span class='lastName'>" + stored.lastName + "</span>" + // Last Name
+            "<a href='#' data-target='#client-" + stored.client + "' data-toggle='collapse' aria-controls='client-" + stored.client + "'><i class='seeMore fa fa-chevron-left'></i></a>" + // Client info toggle
+            "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+            "<label class='btn btn-secondary'>" +              "<input type='radio' name='options' id='option1' autocomplete='off' checked>" +
+            "<i class='fas fa-eye'></i>" + // Watching Button
+            "</label>" +
+            "<label class='btn btn-secondary active'>" +
+            "<input type='radio' name='options' id='option2' autocomplete='off'>" +
+            "<i class='fas fa-plus'></i>" + // Purchased Button
+            "</label>" +
+            "<label class='btn btn-secondary'>" +
+            "<input type='radio' name='options' id='option3' autocomplete='off'>" +
+            "<i class='fas fa-minus'></i>" + // Sold Button
+            "</label>" +
+            "</div>" +
+            "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
+            "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
+            "<ul class='client-info-ul card card-body'>" +
+            "<div><i class='fas fa-user-tie'></i>" + ' ' +
+            "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
+            "<div><i class='fas fa-phone'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Phone</em></li></div>" +
+            "<div><i class='fas fa-envelope'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Email</em></li></div>" +
+            "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Address</em></li></div>" +
+            "<div><span class='timeStamp'><p>Created: " + stored.TimeStamp + "</p></span><span class='delete'> X </span></div>" +
+            "</ul>" +
+            "</div>" +
+            "</li>";
+            
+            editClientInfo();
+            $(list).append(newLi).fadeIn(800); //fade in each li
+              
+        }, 400 * i); //delay each li 400 milliseconds
+    })(i);
+  }
+}
 
   // Filter clients and tickers in search bar
   const searchBar = document.forms['search-clients'].querySelector('input');
+  
   searchBar.addEventListener('keyup', function(e) {
     const term = e.target.value.toLowerCase();
     const clients = $('#client-list-ul>li');
@@ -196,12 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
-
-// Animate the LIs
-$("#client-list-ul > li").each(function(i) {
-  $(this).delay(400 * i).fadeIn(800);
-});
 
 // Create timestamp for Client Info section
 function timeStamp() {
@@ -227,7 +290,7 @@ function timeStamp() {
 
 
 
-// Editable Client Info Fields
+// // Editable Client Info Fields
 
 function editClientInfo() {
   var originalVal;
