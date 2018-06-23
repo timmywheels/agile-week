@@ -188,9 +188,9 @@ document.addEventListener('DOMContentLoaded', function() {
         "</ul>" +
         "</div>" +
         "</li>";
-
+        
       $(list).append(li); // Append the li to client-list
-      editClientInfo(); // Call editClientInfo to create the editable fields for each new li
+      // editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
       
@@ -207,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
         TimeStamp : timeStamp(),
       };
       
+      editClientInfo();
       //local save is a function which takes the clientID as the key and the storage object as the value
       localSave('client-'+ clientId, JSON.stringify(storage));
     }
@@ -248,7 +249,7 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
             "</div>" +
             "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
             "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
-            "<div class='card card-body'>" +
+            "<div class='client-info-ul card card-body'>" +
             "<div><i class='fas fa-user-tie'></i>" + ' ' +
             "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
             "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
@@ -260,7 +261,8 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
             "</li>";
             
             $(list).append(newLi).fadeIn(800); //fade in each li
-              
+            
+            editClientInfo();
               
               
               
@@ -313,7 +315,7 @@ function timeStamp() {
 
 
 
-// Editable Client Info Fields
+// // Editable Client Info Fields
 
 function editClientInfo() {
   var originalVal;
