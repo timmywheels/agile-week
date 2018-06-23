@@ -116,6 +116,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
+
+// this variable creates an object which will be stored
+      var storage = {
+        
+      };
+      
   // Add client-list
   const addForm = document.forms['add-client'];
 
@@ -179,17 +185,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
       $("#addClientTicker, #addClientFirstName, #addClientLastName").val("");
       
-      // this variable creates an object which will be stored
-      var storage = {
-        client : 'client-' + clientId,
-        consultant : consultantInitials,
-        ticker : tickerValue.toUpperCase(),
-        firstName : firstNameValue,
-        lastName : lastNameValue,
-        consultantName : consultantFullName,
-        TimeStamp : timeStamp(),
-      };
-      
+        storage.client = 'client-' + clientId;
+        storage.consultant = consultantInitials;
+        storage.ticker = tickerValue.toUpperCase();
+        storage.firstName = firstNameValue;
+        storage.lastName = lastNameValue;
+        storage.consultantName = consultantFullName;
+        storage.TimeStamp = timeStamp();
+        
       //local save is a function which takes the clientID as the key and the storage object as the value
       localSave('client-'+ clientId, JSON.stringify(storage));
     }
@@ -302,6 +305,7 @@ function editClientInfo() {
     originalVal = $(this).text();
     $(this).text("");
     $("<input type='text'>").appendTo(this).focus();
+    
   });
   $(".client-info-ul").on('focusout', 'li > input', function() {
     var $this = $(this);
