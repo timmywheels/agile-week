@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const list = document.querySelector('#client-list ul');
 
-
   //delete clients
   list.addEventListener('click', function(e) { // Alert user before deleting client
     if (e.target.className == 'delete') {
@@ -74,10 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const li = e.target.parentElement.parentElement.parentElement.parentElement;
         // Might not be the best solution, but it works
         list.removeChild(li);
-        
-        //This code goes into local storage and removes the KEY which matches the ID found in the LI that was just deleted
-        localStorage.removeItem(li.id);
-        
+
       }
     }
     else {
@@ -88,26 +84,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add unique ID to each LI
   // Starts at 4 because of the 4 initial clients that are populated
-  var clientId = 0;
-  var storedID = []; //This array will be used to store the clientids pulled from localStorage
-      
-  function uniqueClientId() {
-    
-    // Increment clientId everytime an LI is added to the list
-    for (var i = 0; i < localStorage.length; i++){ //This function loops through local storage
-      var pedro = JSON.parse(localStorage.getItem(localStorage.key(i))); // pedro opens up local storage and grabs each key=value pair
-      storedID.push(pedro.client); //This code grabs the clientId saved in the "client" section of the object. The UniqueIds are pushed to the storedID array
-    }
-    
-    do { //The do while loop will execute the statement is false
-      clientId += 1; //Client ID will go up 1 each time this loop executes
-    } while (storedID.includes('client-' + clientId)); //if the client-ID exists in the storedID array pulled from localStorage, then loop again until false
-    
-    return 'client-' + clientId; //Once the loop above is complete then clientId now equals a uniqueID
-    
-  }
-  
+  var clientId = 4;
 
+  function uniqueClientId() {
+    // Increment clientId everytime an LI is added to the list
+    clientId += 1;
+    return 'client-' + clientId;
+  };
 
   var addClientBtn = document.getElementById('addClientBtn');
 
@@ -190,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "</li>";
         
       $(list).append(li); // Append the li to client-list
-      // editClientInfo(); // Call editClientInfo to create the editable fields for each new li
+      editClientInfo(); // Call editClientInfo to create the editable fields for each new li
 
       request.result = ''; // Reset request.result
       
@@ -207,7 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
         TimeStamp : timeStamp(),
       };
       
-      editClientInfo();
       //local save is a function which takes the clientID as the key and the storage object as the value
       localSave('client-'+ clientId, JSON.stringify(storage));
     }
@@ -249,22 +231,19 @@ if (localStorage[0] != ""){ //As long as the localStorage is not empty...
             "</div>" +
             "<span class='stockPrice'>$" + parseFloat(stock.price).toFixed(2) + "</span>" + // Display stock with only 2 decimal points
             "<div class='collapse multi-collapse' id='client-" + stored.client + "'>" +
-            "<div class='client-info-ul card card-body'>" +
+            "<ul class='client-info-ul card card-body'>" +
             "<div><i class='fas fa-user-tie'></i>" + ' ' +
             "<p id='consultant'>" + stored.consultantName + "</p>" + "</div>" +
-            "<div><i class='fas fa-phone'></i>" + ' ' + "<p>(978) 495-0992</p></div>" +
-            "<div><i class='fas fa-envelope'></i>" + ' ' + "<p>jordana@yahoo.com</p></div>" +
-            "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<p>14 Champlain Dr., Hudson, MA 01749</p></div>" +
+            "<div><i class='fas fa-phone'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Phone</em></li></div>" +
+            "<div><i class='fas fa-envelope'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Email</em></li></div>" +
+            "<div><i class='fas fa-location-arrow'></i>" + ' ' + "<li><em style='color:#ddd;'>Enter Address</em></li></div>" +
             "<div><span class='timeStamp'><p>Created: " + stored.TimeStamp + "</p></span><span class='delete'> X </span></div>" +
-            "</div>" +
+            "</ul>" +
             "</div>" +
             "</li>";
             
-            $(list).append(newLi).fadeIn(800); //fade in each li
-            
             editClientInfo();
-              
-              
+            $(list).append(newLi).fadeIn(800); //fade in each li
               
         }, 400 * i); //delay each li 400 milliseconds
     })(i);
